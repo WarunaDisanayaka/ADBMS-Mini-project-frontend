@@ -1,0 +1,11 @@
+.topbar{
+    background-color:white;
+}
+.sidebar_container{
+    width: 300px;
+    height: 100vh;
+    background-color: blanchedalmond;
+}
+.btn_cont{
+    height: auto;
+}

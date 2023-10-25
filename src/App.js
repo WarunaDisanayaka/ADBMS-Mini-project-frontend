@@ -12,6 +12,8 @@ function App() {
         <Route path="/" element={<Login/>}></Route>
         <Route path="/signup" element={<Signup/>}></Route>
         <Route path="/admin_dashboard" element={<Dashboard/>}></Route>
+        <Route path="/add_asset" element={<Dashboard/>}></Route>
+        <Route path="/view_asset" element={<Dashboard/>}></Route>
       </Routes>
     </BrowserRouter>
 

@@ -26,6 +26,10 @@ function addassets() {
                 <label for='adddate' class='from-lable'>Added Date: </label>
                 <label input type='date' class='from-control' id='add' placeholder='Enter Added Date' name='adddate'></label>
             </div>
+            <div>
+            <label for='addtime' class='from-lable'>Time: </label>
+            <label input type='time' class='from-control' id='add' placeholder='Enter time' name='addtime'></label>
+            </div>
             </form>
         </div>
     </div>

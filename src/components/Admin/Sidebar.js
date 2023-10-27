@@ -15,19 +15,19 @@ const Sidebar = () => {
             </a>
             <hr className="sidebar-divider my-0" />
             <li className="nav-item">
-                <a className="nav-link" href="/">
+                <a className="nav-link" href="/admin_dashboard">
                     <i className="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
             <hr className="sidebar-divider" />
-            <div className="sidebar-heading">Items</div>
+            <div className="sidebar-heading">Addons</div>
             <li className="nav-item">
                 <a className="nav-link collapsed d-flex align-items-center justify-content-between" href="#collapseTwo"
                     data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true"
                     aria-controls="collapseTwo">
                     <span>
-                        <i className="fas fa-cog"></i>
+                        <i className="fas fa-th-list"></i>
                         Assets
                     </span>
                     <i className="fas fa-angle-right"></i>
@@ -44,56 +44,51 @@ const Sidebar = () => {
                     data-bs-toggle="collapse" data-bs-target="#collapseUtilities" aria-expanded="true"
                     aria-controls="collapseUtilities">
                     <span>
-                        <i className="fas fa-fw fa-wrench"></i>
-                        Utilities
+                        <i className="fas fa-solid fa-hotel"></i>
+                        Rooms
                     </span>
                     <i className="fas fa-angle-right"></i>
                 </a>
                 <div id="collapseUtilities" className="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div className="bg-white py-2 collapse-inner rounded">
-                        <h6 className="collapse-header">Custom Utilities:</h6>
-                        <a className="collapse-item" href="/">Colors</a>
-                        <a className="collapse-item" href="/">Borders</a>
-                        <a className="collapse-item" href="/">Animations</a>
-                        <a className="collapse-item" href="/">Other</a>
+                        
+                        <a className="collapse-item" href="/add_room"><i className="fas fa-plus-circle"></i> Add a Room</a>
+                        
+                    </div>
+                </div>
+            </li>
+            <li className="nav-item">
+                <a className="nav-link collapsed d-flex align-items-center justify-content-between" href="#collapseUsers"
+                    data-bs-toggle="collapse" data-bs-target="#collapseUsers" aria-expanded="true"
+                    aria-controls="collapseUsers">
+                    <span>
+                        <i className="fas fa-solid fa-user"></i>
+                        Users
+                    </span>
+                    <i className="fas fa-angle-right"></i>
+                </a>
+                <div id="collapseUsers" className="collapse" aria-labelledby="headingUsers"
+                    data-parent="#accordionSidebar">
+                    <div className="bg-white py-2 collapse-inner rounded">
+                        
+                        <a className="collapse-item" href="/add_user"><i className="fas fa-plus-circle"></i> Add a User</a>
+                        <a className="collapse-item" href="/view_user"><i className="fas fa-newspaper"></i>  User list</a>
+                        
                     </div>
                 </div>
             </li>
             <hr className="sidebar-divider" />
-            <div className="sidebar-heading">Addons</div>
+            <div className="sidebar-heading">Actions</div>
+        
             <li className="nav-item">
-                <a className="nav-link collapsed d-flex align-items-center justify-content-between" href="#collapsePages"
-                    data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="true"
-                    aria-controls="collapsePages">
-                    <span>
-                        <i className="fas fa-fw fa-folder"></i>
-                        Pages
-                    </span>
-                    <i className="fas fa-angle-right"></i>
-                </a>
-                <div id="collapsePages" className="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div className="bg-white py-2 collapse-inner rounded">
-                        <h6 className="collapse-header">Login Screens:</h6>
-                        <a className="collapse-item" href="/">Login</a>
-                        <a className="collapse-item" href="/">Register</a>
-                        <a className="collapse-item" href="/">Forgot Password</a>
-                        <div className="dropdown-divider"></div>
-                        <h6 className="collapse-header">Other Pages:</h6>
-                        <a className="collapse-item" href="/">404 Page</a>
-                        <a className="collapse-item" href="/">Blank Page</a>
-                    </div>
-                </div>
+                <a className="nav-link" href="/view_complaint"> <i className="fas fa-fw fa-comments"></i> <span>Complaints</span> </a>
             </li>
             <li className="nav-item">
-                <a className="nav-link" href="/"> <i className="fas fa-fw fa-chart-area"></i> <span>Charts</span> </a>
-            </li>
-            <li className="nav-item">
-                <a className="nav-link" href="/"> <i className="fas fa-fw fa-table"></i> <span>Tables</span> </a>
+                <a className="nav-link" href="/view_maintenance"> <i className="fas fa-fw fa-wrench"></i> <span>Maintenance</span> </a>
             </li>
             <hr className="sidebar-divider d-none d-md-block" />
             <div className="text-center d-none d-md-inline">
-                <button className="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
         </ul>
     );

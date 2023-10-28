@@ -11,8 +11,8 @@ function AddAssets() {
             <div className='flex-grow-1'>
                 <Topbar/>
                 <div className="p-4">
-                <div className="login template d-flex justify-content-center align-items-center vh-100 bg-light">
-                    <div className='form_container shadow p-5 mb-5  rounded bg-white'>
+                <div className="login template d-flex">
+                    <div className='form_container'>
                         <form>
                         <h3 className='text-center'>Add Assets</h3>
                         <div class="mb-3 mt-3">

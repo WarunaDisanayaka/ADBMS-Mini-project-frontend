@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Sidebar from '../Sidebar';
 import Topbar from '../../Topbar';
-import { Link } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
 
 function AddRooms() {
@@ -68,9 +67,9 @@ function AddRooms() {
 
                                 <Form.Select required>
                                     <option disabled selected value="">select the room type</option>
-                                    <option value="0">Bedroom</option>
-                                    <option value="1">Washroom</option>
-                                    <option value="2">Common Room</option>
+                                    <option value="bedroom">Bedroom</option>
+                                    <option value="washroom">Washroom</option>
+                                    <option value="common_room">Common Room</option>
                                 </Form.Select>
                             </div>
                         </div>

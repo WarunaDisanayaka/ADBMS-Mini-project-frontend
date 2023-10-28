@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Sidebar from '../Sidebar';
 import Topbar from '../../Topbar';
 import { Link } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
 
 function AddRooms() {
+
+    const [validated, setValidated] = useState(false);
+
+    const handleSubmit = (event) => {
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        setValidated(true);
+    };
+
     return (
         <div className='d-flex '>
             <div>
@@ -14,7 +26,7 @@ function AddRooms() {
                 <Topbar />
 
                 <div className='container p-5 mb-5 mx-auto mt-5 rounded bg-light shadow' style={{ width: 600 }}>
-                    <form >
+                    <Form noValidate validated={validated} onSubmit={handleSubmit} method='get'>
                         <h3 className='text-center mb-4'>Register a Room</h3>
                         <div className='row justify-content-md-center'>
                             <div className="col-4 mb-2 p-1">
@@ -23,8 +35,8 @@ function AddRooms() {
 
                             <div className='col-6 mb-2 p-1'>
 
-                                <Form.Select>
-                                <option disabled selected value="">select the Hostel</option>
+                                <Form.Select required>
+                                    <option disabled selected value="">select the Hostel</option>
                                     <option value="g">Girl's hostel</option>
                                     <option value="b">Boy's hostel</option>
 
@@ -37,8 +49,8 @@ function AddRooms() {
                             </div>
 
                             <div className='col-6 mb-2 p-1'>
-                                <Form.Select >
-                                <option disabled selected value="">select the Floor</option>
+                                <Form.Select required>
+                                    <option disabled selected value="">select the Floor</option>
                                     <option value="0">Ground Floor</option>
                                     <option value="1">First Floor</option>
                                     <option value="2">Second Floor</option>
@@ -54,7 +66,7 @@ function AddRooms() {
 
                             <div className='col-6 mb-2 p-1'>
 
-                                <Form.Select>
+                                <Form.Select required>
                                     <option disabled selected value="">select the room type</option>
                                     <option value="0">Bedroom</option>
                                     <option value="1">Washroom</option>
@@ -69,7 +81,10 @@ function AddRooms() {
 
                             <div className='col-6 mb-2 p-1'>
 
-                                <input type='number' placeholder='Enter Room Number' className='form-control' />
+                                <input type='number' placeholder='Enter Room Number' className='form-control' required/>
+                                <Form.Control.Feedback type="invalid">
+                                    Room number is required!
+                                </Form.Control.Feedback>
                             </div>
                         </div>
                         <div className='row justify-content-md-center'>
@@ -79,19 +94,22 @@ function AddRooms() {
 
                             <div className='col-6 mb-2 p-1'>
 
-                                <input type='number' placeholder='Enter Number of Students' className='form-control' />
+                                <input type='number' placeholder='Enter Number of Students' className='form-control' required/>
+                                <Form.Control.Feedback type="invalid">
+                                    number of students are required!
+                                </Form.Control.Feedback>
                             </div>
                         </div>
 
                         <div className="row justify-content-end">
                             <div className='col-2 mb-2 p-1'>
-                            <button type='submit' className="btn btn-outline-primary">Register</button>
+                                <button type='submit' className="btn btn-outline-primary">Register</button>
                             </div>
                             <div className='col-3 mb-2 p-1'>
-                            <button type='submit' className="btn btn-outline-secondary">Cancel</button>
+                                <button type='submit' className="btn btn-outline-secondary">Cancel</button>
                             </div>
                         </div>
-                    </form>
+                    </Form>
                 </div>
 
 

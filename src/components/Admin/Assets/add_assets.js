@@ -10,10 +10,8 @@ function AddAssets() {
             </div>
             <div className='flex-grow-1'>
                 <Topbar/>
-                <div className="p-4">
-                    <div className="login template d-flex">
-                        <div className='form_container'>
-                            <form>
+                <div className='container p-3 mb-5 mx-auto mt-5 rounded bg-light shadow' style={{width:400}}>
+                        <form>
                                 <h3 className='text-center'>Add Assets</h3>
                                 <div className="mb-3 mt-3">
                                     <label htmlFor='assetsId' className='form-label'>Assets ID: </label>
@@ -59,10 +57,9 @@ function AddAssets() {
                                     </div>
                                 </div>
                                 <button type="submit" className="btn btn-primary">Submit</button>
-                            </form>
-                        </div>
+                                <button type="clear" className="btn btn-secondary mx-3" >Clear</button>
+                         </form>
                     </div>
-                </div>
             </div>
         </div>
     );

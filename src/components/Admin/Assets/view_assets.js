@@ -15,6 +15,7 @@ function ViewAssets() {
                     <p>This is the View Assets page content. You can add your content here.</p>
                 </div>
             </div>
+            
         </div>
     );
 }

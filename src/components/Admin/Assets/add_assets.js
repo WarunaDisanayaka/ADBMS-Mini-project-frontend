@@ -1,8 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Sidebar from '../Sidebar';
 import Topbar from '../../Topbar';
+import { Form } from 'react-bootstrap';
 
 function AddAssets() {
+    const [validated, setValidated] = useState(false);
+
+    const handleSubmit = (event) => {
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        setValidated(true);
+    };
+
     return (
         <div className='d-flex'>
             <div>
@@ -10,58 +22,40 @@ function AddAssets() {
             </div>
             <div className='flex-grow-1'>
                 <Topbar/>
-                <div className="p-4">
-                    <div className="login template d-flex">
-                        <div className='form_container'>
-                            <form>
-                                <h3 className='text-center'>Add Assets</h3>
+                <div className='container p-3 mb-5 mx-auto mt-5 rounded bg-light shadow' style={{width:400}}>
+
+                    <Form noValidate validated={validated} onSubmit={handleSubmit}>
+
+                            <h3 className='text-center'>Add Assets</h3>
                                 <div className="mb-3 mt-3">
                                     <label htmlFor='assetsId' className='form-label'>Assets ID: </label>
                                     <div className="col-sm-10">
-                                        <input type='text' className='form-control' id='assetsId' name='assetsId'/>
+                                        <Form.Control type='text' className='form-control' id='assetsId' name='assetsId' required/>
                                     </div>
                                 </div>
                                 <div className="mb-3 mt-3">
                                     <label htmlFor='name' className='form-label'>Assets Name: </label>
                                     <div className="col-sm-10">
-                                        <input type='text' className='form-control' id='name' name='name'/>
+                                        <Form.Control input type='text' className='form-control' id='name' name='name'required/>
                                     </div>
                                 </div>
                                 <div className="mb-3 mt-3">
                                     <label htmlFor='status' className='form-label'>Status: </label>
                                     <div className="col-sm-10">
-                                        <select className='form-select mt-3'>
-                                            <option>Use Assets</option>
-                                            <option>Repair Assets</option>
-                                            <option>Out of use Assets</option>
-                                        </select>
+                                        <Form.Select className='mt-3' required >
+                                            <option disabled selected value="">please select...</option>
+                                            <option value='in use'>In Use</option>
+                                            <option value='on repair'>On Repair</option>
+                                            <option value='out of use'>Out of use</option>
+                                        </Form.Select>
                                     </div>
                                 </div>
                                 <div className="mb-3 mt-3">
-                                    <label htmlFor='addDate' className='form-label'>Added Date: </label>
-                                    <div className="col-sm-10">
-                                        <input type='date' className='form-control' id='addDate' placeholder='Enter Added Date' name='addDate'/>
-                                    </div>
-                                </div>
-                                <div>
-                                    <label htmlFor='addTime' className='form-label'>Time: </label>
-                                    <div className="col-sm-10">
-                                        <input type='time' className='form-control' id='addTime' placeholder='Enter time' name='addTime'/>
-                                    </div>
-                                </div>
-                                <div className="mb-3">
-                                    <div className="mb-3"></div>
-                                    <div className="col-sm-10">
-                                        <input className="form-check-input" type="checkbox" id="Check"/>
-                                        <label className="form-check-label" htmlFor="Check">
-                                            All are Correct
-                                        </label>
-                                    </div>
+                                    <label htmlFor='room number' className='form-label'>Room Number: </label>
                                 </div>
                                 <button type="submit" className="btn btn-primary">Submit</button>
-                            </form>
-                        </div>
-                    </div>
+                                <button type="clear" className="btn btn-secondary mx-3" >Clear</button>
+                    </Form>
                 </div>
             </div>
         </div>

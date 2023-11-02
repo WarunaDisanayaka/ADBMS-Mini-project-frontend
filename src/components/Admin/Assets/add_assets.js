@@ -52,6 +52,9 @@ function AddAssets() {
                                 </div>
                                 <div className="mb-3 mt-3">
                                     <label htmlFor='room number' className='form-label'>Room Number: </label>
+                                    <div className="col-sm-10">
+                                        <Form.Control input type='text' className='form-control' id='room-number' name='name'required/>
+                                    </div>
                                 </div>
                                 <button type="submit" className="btn btn-primary">Submit</button>
                                 <button type="clear" className="btn btn-secondary mx-3" >Clear</button>

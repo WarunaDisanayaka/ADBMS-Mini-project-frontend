@@ -13,6 +13,7 @@ function ViewAssets() {
                 <div className="p-4">
                     <h2>View Assets Page</h2>
                     <p>This is the View Assets page content. You can add your content here.</p>
+                    
                 </div>
             </div>
         </div>

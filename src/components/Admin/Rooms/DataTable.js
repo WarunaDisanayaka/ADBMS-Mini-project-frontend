@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
+import { useNavigate} from 'react-router-dom';
 
 
-const DataTable = ({ columns, data, onEditRow, onViewRow, onDeleteRow }) => {
+const DataTable = ({ columns, data}) => {
     const [filteredData, setFilteredData] = useState(data);
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    //   const [showModal, setShowModal] = useState(false);
-    //   const [formData, setFormData] = useState({});
 
+    console.log(filteredData);
+    const navigate =  useNavigate();
     const handleSearch = (event) => {
         const term = event.target.value.trim().toLowerCase();
         setSearchTerm(term);
@@ -21,53 +22,26 @@ const DataTable = ({ columns, data, onEditRow, onViewRow, onDeleteRow }) => {
                 )
         );
         setFilteredData(filteredData);
+        
     };
 
-    //   const handleEditRow = (index) => {
-    //     setShowModal(true);
-    //     // setFormData(filteredData[index]);
-    //   };
-
-    //   const handleViewRow = (index) => {
-    //     // Implement view logic here
-    //   };
-
-
-
- 
-
-
-
-
- 
-    const indexOfLastRow = currentPage * rowsPerPage;
-    const indexOfFirstRow = indexOfLastRow - rowsPerPage;
-    const currentRows = filteredData.slice(indexOfFirstRow, indexOfLastRow);
 
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
 
     const handleEditButtonClick = (index) => {
-        if (onEditRow) {
-            onEditRow(filteredData[index]);
-        }
+        const row = filteredData[index];
+       navigate('/edit_room',{state: row});
     };
 
-    // Function to handle view button click
-    const handleViewButtonClick = (index) => {
-        if (onViewRow) {
-            onViewRow(filteredData[index]);
-        }
-    };
+ 
 
     const handleDeleteButtonClick = (index) => {
-        if (onDeleteRow) {
-            onDeleteRow(filteredData[index]);
-        }
+       
     };
 
-   
+
 
     const renderPagination = () => {
         const pageNumbers = Math.ceil(filteredData.length / rowsPerPage);
@@ -96,7 +70,7 @@ const DataTable = ({ columns, data, onEditRow, onViewRow, onDeleteRow }) => {
     return (
         <div className="container mt-5 mb-5">
             <div className="d-flex justify-content-between mb-3">
-                
+
                 <div className="form-inline ml-3">
                     <label className="mr-2">Rows per page:</label>
                     <select
@@ -132,26 +106,20 @@ const DataTable = ({ columns, data, onEditRow, onViewRow, onDeleteRow }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {currentRows.map((row, index) => (
+                        {filteredData.map((row, index) => (
                             <tr key={index}>
                                 {columns.map((col) => (
                                     <td key={col.dataKey}>{row[col.dataKey]}</td>
                                 ))}
                                 <td>
                                     <button
-                                        className="btn btn-primary btn-sm mr-2"
+                                        className="btn btn-primary btn-sm "
                                         onClick={() => handleEditButtonClick(index)}
                                     >
                                         Edit
                                     </button>
                                     <button
-                                        className="btn btn-secondary btn-sm"
-                                        onClick={() => handleViewButtonClick(index)}
-                                    >
-                                        View
-                                    </button>
-                                    <button
-                                        className="btn btn-danger btn-sm"
+                                        className="btn btn-danger btn-sm ml-2"
                                         onClick={() => handleDeleteButtonClick(index)}
                                     >
                                         Delete
@@ -166,18 +134,6 @@ const DataTable = ({ columns, data, onEditRow, onViewRow, onDeleteRow }) => {
             <div className="pagination-container d-flex justify-content-end mt-3">
                 {renderPagination()}
             </div>
-
-            {/* Modal for editing row
-            {showModal && (
-                <div
-                    className="modal"
-                    tabIndex="-1"
-                    role="dialog"
-                    style={{ display: 'block' }}
-                >
-                    
-                </div>
-            )} */}
         </div>
     );
 };

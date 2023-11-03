@@ -11,6 +11,7 @@ import AddUsers from "./components/Admin/Users/add_users";
 import ViewUsers from "./components/Admin/Users/view_users";
 import ViewMaintenance from "./components/Admin/Maintenance/view_maintenance";
 import ViewComplaints from "./components/Admin/Complaints/view_complaints";
+import ViewRooms from "./components/Admin/Rooms/view_rooms";
 function App() {
   return (
     
@@ -26,6 +27,7 @@ function App() {
         <Route path="/add_room" element={<AddRooms/>}></Route>
         <Route path="/view_maintenance" element={<ViewMaintenance/>}></Route>
         <Route path="/view_complaint" element={<ViewComplaints/>}></Route>
+        <Route path="/view_room" element={<ViewRooms/>}></Route>
       </Routes>
     </BrowserRouter>
 

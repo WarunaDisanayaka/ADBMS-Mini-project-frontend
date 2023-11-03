@@ -54,6 +54,7 @@ const Sidebar = () => {
                     <div className="bg-white py-2 collapse-inner rounded">
                         
                         <a className="collapse-item" href="/add_room"><i className="fas fa-plus-circle"></i> Add a Room</a>
+                        <a className="collapse-item" href="/view_room"><i className="fas fa-newspaper"></i> Rooms list</a>
                         
                     </div>
                 </div>

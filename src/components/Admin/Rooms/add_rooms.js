@@ -16,7 +16,7 @@ function AddRooms() {
         if (form.checkValidity() === false) {
             event.preventDefault();
             event.stopPropagation();
-            setValidated(true); 
+            setValidated(true);
         } else {
             event.preventDefault();
 
@@ -31,30 +31,30 @@ function AddRooms() {
                 roomType: formData.get('roomType')
             };
             console.log(jsonData);
-        //    sendData(jsonData);
-       
-        setValidated(false);
-        form.reset();
-        setHostal('');
-        setFloor('');
-        setRoomType('');
+            sendData(jsonData);
+
+            setValidated(false);
+            form.reset();
+            setHostal('');
+            setFloor('');
+            setRoomType('');
         }
-        
-    
-       
+
+
+
     };
 
     const resetForm = (form) => {
-        
-       
-       
+
+
+
     };
 
     const sendData = (data) => {
         axios.post('http://3.229.95.193:8080/rooms/create-room', data)
             .then(response => {
                 // Handle success
-               
+
                 console.log(response);
             })
             .catch(error => {
@@ -73,7 +73,7 @@ function AddRooms() {
                 <Topbar />
 
                 <div className='container p-5 mb-5 mx-auto mt-5 rounded bg-light shadow' style={{ width: 600 }}>
-                    <Form noValidate  validated={validated} onSubmit={handleSubmit} method='post'>
+                    <Form noValidate validated={validated} onSubmit={handleSubmit} method='post'>
                         <h3 className='text-center mb-4'>Register a Room</h3>
                         <div className='row justify-content-md-center'>
                             <div className="col-4 mb-2 p-1">
@@ -100,8 +100,8 @@ function AddRooms() {
 
                             <div className='col-6 mb-2 p-1'>
                                 <Form.Select required name="floor"
-                                value={floor}
-                                onChange={(e) => setFloor(e.target.value)}
+                                    value={floor}
+                                    onChange={(e) => setFloor(e.target.value)}
                                 >
                                     <option disabled selected value="">select the Floor</option>
                                     <option value="1">Ground Floor</option>
@@ -137,7 +137,7 @@ function AddRooms() {
 
                             <div className='col-6 mb-2 p-1'>
 
-                                <input type='number' name='roomNo' placeholder='Enter Room Number' className='form-control' required/>
+                                <input type='number' name='roomNo' placeholder='Enter Room Number' className='form-control' required />
                                 <Form.Control.Feedback type="invalid">
                                     Room number is required!
                                 </Form.Control.Feedback>

@@ -56,8 +56,8 @@ function AddAssets() {
                                         <Form.Control input type='text' className='form-control' id='room-number' name='name'required/>
                                     </div>
                                 </div>
-                                <button type="submit" className="btn btn-primary">Submit</button>
-                                <button type="clear" className="btn btn-secondary mx-3" >Clear</button>
+                                <button as="input" type="submit" className="btn btn-primary" value="Submit">Submit</button>
+                                <button as="input" type="clear" className="btn btn-secondary mx-3" value="Clear">Clear</button>
                     </Form>
                 </div>
             </div>

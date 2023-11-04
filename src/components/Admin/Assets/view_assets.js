@@ -6,7 +6,6 @@ import AssetTable from './asset_table';
 import axios from 'axios';
 
 
-
 function ViewAssets() {
     const columns = [
         { label: 'Asset ID', dataKey: 'assetsId' },
@@ -17,8 +16,6 @@ function ViewAssets() {
         { label: 'QR Code', dataKey: 'qrCodePath' },
 
     ];
-
-
 
 
     const [assetdata, setAssetData] = useState([]);
@@ -56,5 +53,7 @@ function ViewAssets() {
         </div>
     );
 }
+
+
 
 export default ViewAssets;

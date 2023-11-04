@@ -3,13 +3,22 @@ import Sidebar from '../Sidebar';
 import Topbar from '../../Topbar';
 import { Form } from 'react-bootstrap';
 import axios from 'axios';
+import { useLocation } from 'react-router';
 
-function AddRooms() {
+function EditRooms() {
+
+    const location = useLocation();
+    const props = location.state;
+
+    console.log(props);
 
     const [validated, setValidated] = useState(false);
-    const [hostal, setHostal] = useState('');
-    const [floor, setFloor] = useState('');
-    const [roomType, setRoomType] = useState('');
+    const [hostal, setHostal] = useState(props.hostal || '');
+    const [floor, setFloor] = useState(props.floor || '');
+    const [roomType, setRoomType] = useState(props.roomType || '');
+    const [roomno,setRoomNo] = useState(props.roomNo || '');
+
+    
 
     const handleSubmit = (event) => {
         const form = event.currentTarget;
@@ -31,7 +40,7 @@ function AddRooms() {
                 roomType: formData.get('roomType')
             };
             console.log(jsonData);
-            sendData(jsonData);
+            sendData(roomId,jsonData);
 
             setValidated(false);
             form.reset();
@@ -44,14 +53,10 @@ function AddRooms() {
 
     };
 
-    const resetForm = (form) => {
+ 
 
-
-
-    };
-
-    const sendData = (data) => {
-        axios.post('http://3.229.95.193:8080/rooms/create-room', data)
+    const sendData = (id,data) => {
+        axios.post('http://3.229.95.193:8080/rooms/update-room/${id}', data)
             .then(response => {
                 // Handle success
 
@@ -85,6 +90,7 @@ function AddRooms() {
                                 <Form.Select required name="hostal"
                                     value={hostal}
                                     onChange={(e) => setHostal(e.target.value)}
+                                    disabled
                                 >
                                     <option disabled selected={hostal} value="">select the Hostel</option>
                                     <option value="G">Girl's hostel</option>
@@ -137,7 +143,7 @@ function AddRooms() {
 
                             <div className='col-6 mb-2 p-1'>
 
-                                <input type='number' name='roomNo' placeholder='Enter Room Number' className='form-control' required />
+                                <input readOnly type='number' name='roomNo' placeholder='Enter Room Number' className='form-control' value={roomno} required />
                                 <Form.Control.Feedback type="invalid">
                                     Room number is required!
                                 </Form.Control.Feedback>
@@ -146,13 +152,13 @@ function AddRooms() {
 
                         <div className="row justify-content-end">
                             <div className='col-2 mb-2 p-1'>
-                                <button type='submit' className="btn btn-outline-primary">Register</button>
+                                <button type='submit' className="btn btn-outline-primary">Update</button>
                             </div>
                             <div className='col-3 mb-2 p-1'>
                                 <button type='reset' className="btn btn-outline-secondary">Cancel</button>
                             </div>
                         </div>
-                    </Form>
+                    </Form> 
                 </div>
 
 
@@ -161,4 +167,4 @@ function AddRooms() {
     );
 }
 
-export default AddRooms;
+export default EditRooms;

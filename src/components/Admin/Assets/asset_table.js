@@ -33,6 +33,8 @@ const AssetTable = ({ columns, data }) => {
 
     };
 
+    
+
 
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);

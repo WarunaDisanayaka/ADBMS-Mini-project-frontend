@@ -10,8 +10,6 @@ function EditRooms() {
     const location = useLocation();
     const props = location.state;
 
-    console.log(props);
-
     const [validated, setValidated] = useState(false);
     const [hostal, setHostal] = useState(props.hostal || '');
     const [floor, setFloor] = useState(props.floor || '');
@@ -56,7 +54,7 @@ function EditRooms() {
  
 
     const sendData = (id,data) => {
-        axios.post('http://3.229.95.193:8080/rooms/update-room/${id}', data)
+        axios.post('http://localhost:8080/rooms/update-room/${id}', data)
             .then(response => {
                 // Handle success
 
@@ -87,7 +85,7 @@ function EditRooms() {
 
                             <div className='col-6 mb-2 p-1'>
 
-                                <Form.Select required name="hostal"
+                                <Form.Select required 
                                     value={hostal}
                                     onChange={(e) => setHostal(e.target.value)}
                                     disabled
@@ -95,7 +93,7 @@ function EditRooms() {
                                     <option disabled selected={hostal} value="">select the Hostel</option>
                                     <option value="G">Girl's hostel</option>
                                     <option value="B">Boy's hostel</option>
-
+                                    <input type="hidden" name="hostal" value={hostal} />
                                 </Form.Select>
                             </div>
                         </div>

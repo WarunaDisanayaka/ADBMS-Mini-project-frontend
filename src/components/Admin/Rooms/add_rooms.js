@@ -14,6 +14,7 @@ function AddRooms() {
     const [roomType, setRoomType] = useState('');
 
     const handleSubmit = (event) => {
+        
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
             event.preventDefault();

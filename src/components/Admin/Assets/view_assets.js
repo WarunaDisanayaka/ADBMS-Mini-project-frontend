@@ -5,6 +5,8 @@ import DataTable from '../Rooms/DataTable';
 import AssetTable from './asset_table';
 import axios from 'axios';
 
+
+
 function ViewAssets() {
     const columns = [
         { label: 'Asset ID', dataKey: 'assetsId' },
@@ -17,7 +19,7 @@ function ViewAssets() {
     ];
 
 
-    
+
 
     const [assetdata, setAssetData] = useState([]);
 

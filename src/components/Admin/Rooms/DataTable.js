@@ -9,7 +9,7 @@ const DataTable = ({ columns, data }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     // const navigate = useNavigate();
-    const [id,setId] = useState('');
+    const [id, setId] = useState('');
 
     useEffect(() => {
         setFilteredData(data);
@@ -32,7 +32,7 @@ const DataTable = ({ columns, data }) => {
 
 
     const handlePageChange = (pageNumber) => {
-        
+
         setCurrentPage(pageNumber);
     };
 
@@ -169,7 +169,7 @@ const DataTable = ({ columns, data }) => {
                 </Modal.Footer>
             </Modal>
         </div>
-        
+
     );
 };
 

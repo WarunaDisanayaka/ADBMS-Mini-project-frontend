@@ -1,18 +1,23 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useNavigate} from 'react-router-dom';
+import { Button, Modal } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 
-const AssetTable = ({ columns, data}) => {
+const AssetTable = ({ columns, data }) => {
     const [filteredData, setFilteredData] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    const navigate =  useNavigate();
+    const navigate = useNavigate();
+    const [id,setId] = useState('');
+
+
 
     useEffect(() => {
         setFilteredData(data);
-      }, [data]);
-    
+    }, [data]);
+
     const handleSearch = (event) => {
         const term = event.target.value.trim().toLowerCase();
         setSearchTerm(term);
@@ -24,24 +29,41 @@ const AssetTable = ({ columns, data}) => {
                         row[col.dataKey].toString().toLowerCase().includes(term)
                 )
         );
-         setFilteredData(filteredData);
-        
+        setFilteredData(filteredData);
+
     };
-    
+
+
+
 
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
 
     const handleEditButtonClick = (index) => {
-        const row = data[index];
-       navigate('/edit_room',{state: row});
+        // const row = data[index];
+        // navigate('/edit_room', { state: row });
     };
 
- 
 
     const handleDeleteButtonClick = (index) => {
-       
+        setId(filteredData[index].assetsId);
+        setShow(true);
+    };
+
+    const handleDelete = () => {
+        axios
+            .delete(`http://3.229.95.193:8080/assets/${id}`)
+            .then(response => {
+                // Handle success
+                console.log(response);
+                window.location.reload();
+            })
+            .catch(error => {
+                // Handle error
+                console.error(error);
+            });
+        setShow(false);
     };
 
 
@@ -69,6 +91,10 @@ const AssetTable = ({ columns, data}) => {
             </ul>
         );
     };
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
 
     return (
         <div className="container mt-5 mb-5">
@@ -137,6 +163,22 @@ const AssetTable = ({ columns, data}) => {
             <div className="pagination-container d-flex justify-content-end mt-3">
                 {renderPagination()}
             </div>
+
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Delete Confirmation</Modal.Title>
+                </Modal.Header>
+                <Modal.Body><div className="alert alert-danger">Are you sure you want to delete '{id}' Asset?</div></Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        CLOSE
+                    </Button>
+                    <Button variant="danger" onClick={handleDelete} >
+                        DELETE
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
         </div>
     );
 };

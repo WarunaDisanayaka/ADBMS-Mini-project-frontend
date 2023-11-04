@@ -5,6 +5,7 @@ import DataTable from '../Rooms/DataTable';
 import AssetTable from './asset_table';
 import axios from 'axios';
 
+
 function ViewAssets() {
     const columns = [
         { label: 'Asset ID', dataKey: 'assetsId' },
@@ -15,6 +16,7 @@ function ViewAssets() {
         { label: 'QR Code', dataKey: 'qrCodePath' },
 
     ];
+
 
     const [assetdata, setAssetData] = useState([]);
 
@@ -31,6 +33,8 @@ function ViewAssets() {
                 console.error('Error fetching room data:', error);
             });
     }, []);
+
+
 
     return (
         <div className='d-flex'>
@@ -49,5 +53,7 @@ function ViewAssets() {
         </div>
     );
 }
+
+
 
 export default ViewAssets;

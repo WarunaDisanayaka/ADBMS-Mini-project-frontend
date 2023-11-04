@@ -149,7 +149,7 @@ function AddRooms() {
                                 <button type='submit' className="btn btn-outline-primary">Register</button>
                             </div>
                             <div className='col-3 mb-2 p-1'>
-                                <button type='submit' className="btn btn-outline-secondary">Cancel</button>
+                                <button type='reset' className="btn btn-outline-secondary">Cancel</button>
                             </div>
                         </div>
                     </Form>

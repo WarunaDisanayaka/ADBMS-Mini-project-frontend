@@ -40,7 +40,7 @@ function EditRooms() {
                 roomType: formData.get('roomType')
             };
             console.log(jsonData);
-            // sendData(jsonData);
+            sendData(roomId,jsonData);
 
             setValidated(false);
             form.reset();
@@ -55,8 +55,8 @@ function EditRooms() {
 
  
 
-    const sendData = (data) => {
-        axios.post('http://3.229.95.193:8080/rooms/create-room', data)
+    const sendData = (id,data) => {
+        axios.post('http://3.229.95.193:8080/rooms/update-room/${id}', data)
             .then(response => {
                 // Handle success
 
@@ -90,6 +90,7 @@ function EditRooms() {
                                 <Form.Select required name="hostal"
                                     value={hostal}
                                     onChange={(e) => setHostal(e.target.value)}
+                                    disabled
                                 >
                                     <option disabled selected={hostal} value="">select the Hostel</option>
                                     <option value="G">Girl's hostel</option>
@@ -142,7 +143,7 @@ function EditRooms() {
 
                             <div className='col-6 mb-2 p-1'>
 
-                                <input type='number' name='roomNo' placeholder='Enter Room Number' className='form-control' value={roomno} required />
+                                <input readOnly type='number' name='roomNo' placeholder='Enter Room Number' className='form-control' value={roomno} required />
                                 <Form.Control.Feedback type="invalid">
                                     Room number is required!
                                 </Form.Control.Feedback>
@@ -154,10 +155,10 @@ function EditRooms() {
                                 <button type='submit' className="btn btn-outline-primary">Update</button>
                             </div>
                             <div className='col-3 mb-2 p-1'>
-                                <button type='submit' className="btn btn-outline-secondary">Cancel</button>
+                                <button type='reset' className="btn btn-outline-secondary">Cancel</button>
                             </div>
                         </div>
-                    </Form>
+                    </Form> 
                 </div>
 
 

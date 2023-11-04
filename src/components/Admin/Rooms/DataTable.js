@@ -1,15 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate} from 'react-router-dom';
 
 
 const DataTable = ({ columns, data}) => {
-    const [filteredData, setFilteredData] = useState(data);
+    const [filteredData, setFilteredData] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(5);
-
-    console.log(filteredData);
     const navigate =  useNavigate();
+
+    useEffect(() => {
+        setFilteredData(data);
+      }, [data]);
+    
     const handleSearch = (event) => {
         const term = event.target.value.trim().toLowerCase();
         setSearchTerm(term);
@@ -21,17 +24,17 @@ const DataTable = ({ columns, data}) => {
                         row[col.dataKey].toString().toLowerCase().includes(term)
                 )
         );
-        setFilteredData(filteredData);
+         setFilteredData(filteredData);
         
     };
-
+    
 
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
 
     const handleEditButtonClick = (index) => {
-        const row = filteredData[index];
+        const row = data[index];
        navigate('/edit_room',{state: row});
     };
 
@@ -111,15 +114,15 @@ const DataTable = ({ columns, data}) => {
                                 {columns.map((col) => (
                                     <td key={col.dataKey}>{row[col.dataKey]}</td>
                                 ))}
-                                <td>
+                                <td className='p-2'>
                                     <button
-                                        className="btn btn-primary btn-sm "
+                                        className="btn btn-outline-primary btn-sm ml"
                                         onClick={() => handleEditButtonClick(index)}
                                     >
                                         Edit
                                     </button>
                                     <button
-                                        className="btn btn-danger btn-sm ml-2"
+                                        className="btn btn-outline-danger btn-sm ml-2"
                                         onClick={() => handleDeleteButtonClick(index)}
                                     >
                                         Delete

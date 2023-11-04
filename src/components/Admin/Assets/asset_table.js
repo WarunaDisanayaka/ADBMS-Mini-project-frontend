@@ -53,7 +53,7 @@ const AssetTable = ({ columns, data }) => {
 
     const handleDelete = () => {
         axios
-            .delete(`http://3.229.95.193:8080/rooms/delete-room/${id}`)
+            .delete(`http://3.229.95.193:8080/assets/${id}`)
             .then(response => {
                 // Handle success
                 console.log(response);
@@ -174,7 +174,7 @@ const AssetTable = ({ columns, data }) => {
                     <Button variant="secondary" onClick={handleClose}>
                         CLOSE
                     </Button>
-                    <Button variant="danger" >
+                    <Button variant="danger" onClick={handleDelete} >
                         DELETE
                     </Button>
                 </Modal.Footer>

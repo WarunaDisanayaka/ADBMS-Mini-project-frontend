@@ -14,7 +14,6 @@ function AddRooms() {
     const [roomType, setRoomType] = useState('');
 
     const handleSubmit = (event) => {
-        
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
             event.preventDefault();
@@ -37,6 +36,7 @@ function AddRooms() {
             sendData(jsonData);
 
             setValidated(false);
+            form.reset();
             resetForm();
         }
 
@@ -45,7 +45,7 @@ function AddRooms() {
     };
 
     const resetForm = () => {
-        setRoomNO('');
+       
         setHostal('');
         setFloor('');
         setRoomType('');

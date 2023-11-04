@@ -19,7 +19,7 @@ function ViewAssets() {
     const [assetdata, setAssetData] = useState([]);
 
     useEffect(() => {
-        // Fetch data from the  API
+        // Fetch data from the API
         axios.get('http://3.229.95.193:8080/assets/')
             .then(response => {
                 // Handle success
@@ -27,7 +27,7 @@ function ViewAssets() {
 
             })
             .catch(error => {
-                // Handle  error
+                // Handle error
                 console.error('Error fetching room data:', error);
             });
     }, []);

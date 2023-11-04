@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import Sidebar from '../Sidebar';
 import Topbar from '../../Topbar';
-import { Form } from 'react-bootstrap';
+import { Alert, Form, Toast } from 'react-bootstrap';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function AddRooms() {
 
@@ -35,27 +37,42 @@ function AddRooms() {
 
             setValidated(false);
             form.reset();
-            setHostal('');
-            setFloor('');
-            setRoomType('');
+            resetForm();
         }
 
 
 
     };
 
-    const resetForm = (form) => {
+    const resetForm = () => {
+       
+        setHostal('');
+        setFloor('');
+        setRoomType('');
+    };
 
-
+    const notify = () => {
+        toast.success('Record created successfully!', {
+            position: "top-right",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
 
     };
+
 
     const sendData = (data) => {
         axios.post('http://3.229.95.193:8080/rooms/create-room', data)
             .then(response => {
                 // Handle success
-
                 console.log(response);
+                notify();
+
             })
             .catch(error => {
                 // Handle error
@@ -149,14 +166,15 @@ function AddRooms() {
                                 <button type='submit' className="btn btn-outline-primary">Register</button>
                             </div>
                             <div className='col-3 mb-2 p-1'>
-                                <button type='reset' className="btn btn-outline-secondary">Cancel</button>
+                                <button type='reset' className="btn btn-outline-secondary" onClick={resetForm}>Cancel</button>
                             </div>
                         </div>
                     </Form>
                 </div>
-
+                <ToastContainer />
 
             </div>
+
         </div>
     );
 }

@@ -32,6 +32,8 @@ function ViewAssets() {
             });
     }, []);
 
+    
+
     return (
         <div className='d-flex'>
             <div>

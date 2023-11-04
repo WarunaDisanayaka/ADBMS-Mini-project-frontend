@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
-const AssetTable = ({ columns, data}) => {
+const AssetTable = ({ columns, data }) => {
     const [filteredData, setFilteredData] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    const navigate =  useNavigate();
+    const navigate = useNavigate();
 
 
 
     useEffect(() => {
         setFilteredData(data);
-      }, [data]);
-    
+    }, [data]);
+
     const handleSearch = (event) => {
         const term = event.target.value.trim().toLowerCase();
         setSearchTerm(term);
@@ -26,10 +26,10 @@ const AssetTable = ({ columns, data}) => {
                         row[col.dataKey].toString().toLowerCase().includes(term)
                 )
         );
-         setFilteredData(filteredData);
-        
+        setFilteredData(filteredData);
+
     };
-    
+
 
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
@@ -37,14 +37,14 @@ const AssetTable = ({ columns, data}) => {
 
     const handleEditButtonClick = (index) => {
         const row = data[index];
-       navigate('/edit_room',{state: row});
+        navigate('/edit_room', { state: row });
     };
 
- 
-    
+
+
 
     const handleDeleteButtonClick = (index) => {
-       
+
     };
 
 
@@ -140,6 +140,22 @@ const AssetTable = ({ columns, data}) => {
             <div className="pagination-container d-flex justify-content-end mt-3">
                 {renderPagination()}
             </div>
+
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Delete Confirmation</Modal.Title>
+                </Modal.Header>
+                <Modal.Body><div className="alert alert-danger">Are you sure you want to delete '{id}' Room?</div></Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        CLOSE
+                    </Button>
+                    <Button variant="danger" onClick={handleDelete}>
+                        DELETE
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
         </div>
     );
 };

@@ -1,4 +1,6 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Button, Modal } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -8,6 +10,7 @@ const AssetTable = ({ columns, data }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const navigate = useNavigate();
+    const [id,setId] = useState('');
 
 
 
@@ -36,16 +39,33 @@ const AssetTable = ({ columns, data }) => {
     };
 
     const handleEditButtonClick = (index) => {
-        const row = data[index];
-        navigate('/edit_room', { state: row });
+        // const row = data[index];
+        // navigate('/edit_room', { state: row });
     };
 
 
 
 
     const handleDeleteButtonClick = (index) => {
-
+        setId(filteredData[index].assetsId);
+        setShow(true);
     };
+
+    const handleDelete = () => {
+        axios
+            .delete(`http://3.229.95.193:8080/rooms/delete-room/${id}`)
+            .then(response => {
+                // Handle success
+                console.log(response);
+                window.location.reload();
+            })
+            .catch(error => {
+                // Handle error
+                console.error(error);
+            });
+        setShow(false);
+    };
+
 
 
 
@@ -72,6 +92,10 @@ const AssetTable = ({ columns, data }) => {
             </ul>
         );
     };
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
 
     return (
         <div className="container mt-5 mb-5">
@@ -145,12 +169,12 @@ const AssetTable = ({ columns, data }) => {
                 <Modal.Header closeButton>
                     <Modal.Title>Delete Confirmation</Modal.Title>
                 </Modal.Header>
-                <Modal.Body><div className="alert alert-danger">Are you sure you want to delete '{id}' Room?</div></Modal.Body>
+                <Modal.Body><div className="alert alert-danger">Are you sure you want to delete '{id}' Asset?</div></Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         CLOSE
                     </Button>
-                    <Button variant="danger" onClick={handleDelete}>
+                    <Button variant="danger" >
                         DELETE
                     </Button>
                 </Modal.Footer>

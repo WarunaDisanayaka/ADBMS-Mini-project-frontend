@@ -33,7 +33,7 @@ const AssetTable = ({ columns, data }) => {
 
     };
 
-    
+
 
 
     const handlePageChange = (pageNumber) => {
@@ -44,8 +44,6 @@ const AssetTable = ({ columns, data }) => {
         // const row = data[index];
         // navigate('/edit_room', { state: row });
     };
-
-
 
 
     const handleDeleteButtonClick = (index) => {
@@ -67,7 +65,6 @@ const AssetTable = ({ columns, data }) => {
             });
         setShow(false);
     };
-
 
 
 

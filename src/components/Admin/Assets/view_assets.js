@@ -16,6 +16,9 @@ function ViewAssets() {
 
     ];
 
+
+    
+
     const [assetdata, setAssetData] = useState([]);
 
     useEffect(() => {
@@ -32,7 +35,7 @@ function ViewAssets() {
             });
     }, []);
 
-    
+
 
     return (
         <div className='d-flex'>

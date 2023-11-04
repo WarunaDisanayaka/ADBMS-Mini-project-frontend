@@ -9,6 +9,8 @@ const AssetTable = ({ columns, data}) => {
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const navigate =  useNavigate();
 
+
+
     useEffect(() => {
         setFilteredData(data);
       }, [data]);
@@ -39,6 +41,7 @@ const AssetTable = ({ columns, data}) => {
     };
 
  
+    
 
     const handleDeleteButtonClick = (index) => {
        

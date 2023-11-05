@@ -10,9 +10,9 @@ import { format } from 'date-fns';
 
 function AddAssets() {
     const [validated, setValidated] = useState(false);
-    const [name, setName] = useState([]); 
-    const [roomid,setRoomId] = useState([]);
-    const [idlist,setIdList] = useState([]);
+    const [name, setName] = useState([]);
+    const [roomid, setRoomId] = useState([]);
+    const [idlist, setIdList] = useState([]);
     const status = "in use";
 
 
@@ -23,24 +23,24 @@ function AddAssets() {
             event.preventDefault();
             event.stopPropagation();
             setValidated(true);
-        }else{
+        } else {
             event.preventDefault();
-            
-            const number1= Math.floor(100 + Math.random() * 999);
-            const number2= Math.floor(100 + Math.random() * 999);
+
+            const number1 = Math.floor(100 + Math.random() * 999);
+            const number2 = Math.floor(100 + Math.random() * 999);
             const uniqueID = number1.toString() + number2.toString();
 
             const now = new Date();
             const date = format(now, 'yyyy-MM-dd');
-         
 
-            
+
+
             const formdata = {
-                assetsId : uniqueID,
-                name : name.value,
-                status : status,
-                roomId : roomid.value,
-                addedDate : date
+                assetsId: uniqueID,
+                name: name.value,
+                status: status,
+                roomId: roomid.value,
+                addedDate: date
             };
 
             sendData(formdata);
@@ -50,8 +50,8 @@ function AddAssets() {
 
 
         }
-        
-        
+
+
     };
 
     const handleReset = () => {
@@ -89,7 +89,7 @@ function AddAssets() {
     };
 
     useEffect(() => {
-        
+
         axios.get('http://3.229.95.193:8080/rooms/get-all-room-ids')
             .then(response => {
                 // Handle success
@@ -100,8 +100,8 @@ function AddAssets() {
                 // Handle error
                 console.error('Error fetching room data:', error);
             });
-            // console.log(idlist);
-    },[]);
+        // console.log(idlist);
+    }, []);
 
     const names = [
         { value: 'table', label: 'table' },
@@ -111,15 +111,15 @@ function AddAssets() {
         { value: 'clothrack', label: 'Cloth_rack' },
         { value: 'cupboard', label: 'Cupboard' },
         { value: 'bench', label: 'Bench' },
-       
+
     ];
     // const state = [
     //     { value: 'in use', label: 'In use' },
     //     { value: 'under maintenance', label: 'Under maintenance' },
     //     { value: 'out of service', label: 'Out of service' },
-        
+
     // ];
-    
+
     return (
         <div className='d-flex'>
             <div>
@@ -143,27 +143,27 @@ function AddAssets() {
                                     value={name}
                                     onChange={setName}
                                 />
-                                {validated && name.length===0 && (
+                                {validated && name.length === 0 && (
                                     <div className="invalid-feedback d-block">
                                         Please select an option.
                                     </div>
                                 )}
                             </div>
                         </div>
-                        
+
                         <div className='row justify-content-md-center'>
                             <div className="col-4 mb-2 p-1">
                                 <label className=''>Room ID</label>
                             </div>
                             <div className='col-6 mb-2 p-1'>
                                 <Select
-                                    
+
                                     required
                                     options={idlist}
                                     value={roomid}
                                     onChange={setRoomId}
                                 />
-                                {validated && roomid.length===0 && (
+                                {validated && roomid.length === 0 && (
                                     <div className="invalid-feedback d-block">
                                         Please select an option.
                                     </div>

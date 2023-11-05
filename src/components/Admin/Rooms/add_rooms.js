@@ -89,7 +89,7 @@ function AddRooms() {
             <div className='flex-grow-1'>
                 <Topbar />
 
-                <div className='container p-5 mb-5 mx-auto mt-5 rounded bg-light shadow' style={{ width: 600 }}>
+                <div className='container p-5 mb-5 mx-auto mt-5 rounded bg-light shadow-sm' style={{ width: 600 }}>
                     <Form noValidate validated={validated} onSubmit={handleSubmit} method='post'>
                         <h3 className='text-center mb-4'>Register a Room</h3>
                         <div className='row justify-content-md-center'>

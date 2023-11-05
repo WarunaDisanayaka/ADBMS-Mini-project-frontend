@@ -5,9 +5,9 @@ import "../../Assets/css/sb-admin-2.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 const Sidebar = () => {
-    return (
+    return ( 
         <ul className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-            <a className="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+            <a className="sidebar-brand d-flex align-items-center justify-content-center" href="/admin_dashboard">
                 {/* <div className="sidebar-brand-icon ">
                     <i className="fas fa-house"></i>
                 </div> */}

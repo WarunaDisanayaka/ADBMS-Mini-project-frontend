@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Sidebar from '../Sidebar';
 import Topbar from '../../Topbar';
-import DataTable from '../Rooms/DataTable';
 import AssetTable from './asset_table';
 import axios from 'axios';
 
@@ -13,7 +12,7 @@ function ViewAssets() {
         { label: 'Asset Status', dataKey: 'status' },
         { label: 'Room ID', dataKey: 'roomId' },
         { label: 'Added Date', dataKey: 'addedDate' },
-        { label: 'QR Code', dataKey: 'qrCodePath' },
+        { label: 'QR Code', dataKey: '' },
 
     ];
 

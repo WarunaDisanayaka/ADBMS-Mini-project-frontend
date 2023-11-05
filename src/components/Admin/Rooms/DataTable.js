@@ -64,28 +64,30 @@ const DataTable = ({ columns, data }) => {
     };
 
     const renderPagination = () => {
-        const pageNumbers = Math.ceil(filteredData.length / rowsPerPage);
+        const indexOfLastRow = currentPage * rowsPerPage;
+        const indexOfFirstRow = indexOfLastRow - rowsPerPage;
+        
+    
         return (
             <ul className="pagination">
-                {Array.from({ length: pageNumbers }, (_, index) => index + 1).map(
-                    (pageNumber) => (
-                        <li
-                            key={pageNumber}
-                            className={`page-item ${currentPage === pageNumber ? "active" : ""
-                                }`}
+            {Array.from({ length: Math.ceil(filteredData.length / rowsPerPage) }, (_, index) => index + 1).map(
+                (pageNumber) => (
+                    <li
+                        key={pageNumber}
+                        className={`page-item ${currentPage === pageNumber ? "active" : ""}`}
+                    >
+                        <button
+                            className="page-link"
+                            onClick={() => handlePageChange(pageNumber)}
                         >
-                            <button
-                                className="page-link"
-                                onClick={() => handlePageChange(pageNumber)}
-                            >
-                                {pageNumber}
-                            </button>
-                        </li>
-                    )
-                )}
-            </ul>
-        );
-    };
+                            {pageNumber}
+                        </button>
+                    </li>
+                )
+            )}
+        </ul>
+    );
+};
 
 
     const [show, setShow] = useState(false);

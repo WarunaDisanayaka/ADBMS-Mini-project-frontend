@@ -15,7 +15,10 @@ function AddAssets() {
     const [idlist, setIdList] = useState([]);
     const status = "in use";
 
-
+    const [statuses] = useState([
+        { type: 'success', message: 'Record created successfully!' },
+        { type: 'error', message: 'Error creation failed.' },
+      ]);
 
     const [value1, setValue1] = useState("");
     const [value2, setValue2] = useState("");
@@ -85,20 +88,21 @@ function AddAssets() {
         axios.post('http://3.229.95.193:8080/assets/', data)
             .then(response => {
                 // Handle success
-                console.log(response);
-                notify();
+          
+                
+                notify(statuses[0].type,statuses[0].message);
 
             })
             .catch(error => {
                 // Handle error
-                console.error(error);
+                notify(statuses[1].type,statuses[1].message);
             });
     };
 
-    const notify = () => {
-        toast.success('Record created successfully!', {
+    const notify = (type,msg) => {
+        toast[type](msg, {
             position: "top-right",
-            autoClose: 4000,
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,

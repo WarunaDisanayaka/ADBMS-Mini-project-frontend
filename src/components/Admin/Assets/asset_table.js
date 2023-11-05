@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const AssetTable = ({ columns, data }) => {
 
@@ -36,6 +37,18 @@ const AssetTable = ({ columns, data }) => {
         }
     };
 
+    const notify = () => {
+        toast.error("Error occurred.", {
+          position: 'top-right',
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'light',
+        });
+      };
     
 
 
@@ -92,7 +105,7 @@ const AssetTable = ({ columns, data }) => {
             })
             .catch(error => {
                 // Handle error
-                console.error(error);
+                notify();
             });
         setShow(false);
     };
@@ -103,7 +116,6 @@ const AssetTable = ({ columns, data }) => {
 
     const [show, setShow] = useState(false);
     const [show2, setShow2] = useState(false);
-    const [imageUrl, setImageUrl] = useState('');
     const handleClose = () => {
         setShow(false);
         setShow2(false);

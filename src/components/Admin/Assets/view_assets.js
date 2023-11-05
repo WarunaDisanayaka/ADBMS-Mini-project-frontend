@@ -3,6 +3,7 @@ import Sidebar from '../Sidebar';
 import Topbar from '../../Topbar';
 import AssetTable from './asset_table';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 
 function ViewAssets() {
@@ -19,6 +20,19 @@ function ViewAssets() {
 
     const [assetdata, setAssetData] = useState([]);
 
+    const notify = () => {
+        toast.error("Error occurred.", {
+          position: 'top-right',
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'light',
+        });
+      };
+
     useEffect(() => {
         // Fetch data from the API
         axios.get('http://3.229.95.193:8080/assets/')
@@ -29,7 +43,7 @@ function ViewAssets() {
             })
             .catch(error => {
                 // Handle error
-                console.error('Error fetching room data:', error);
+              notify();
             });
     }, []);
 

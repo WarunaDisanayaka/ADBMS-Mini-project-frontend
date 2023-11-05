@@ -21,6 +21,10 @@ function EditAssets() {
 
     ];
 
+    const [statuses] = useState([
+        { type: 'success', message: 'Record updated successfully!' },
+        { type: 'error', message: 'Error occurred.' },
+      ]);
 
     const location = useLocation();
     const props = location.state;
@@ -55,9 +59,7 @@ function EditAssets() {
 
 
             updateData(props.assetsId, formdata);
-            setName([]);
-            setRoomId([]);
-            setValidated(false);
+            handleReset();
 
 
         }
@@ -75,18 +77,18 @@ function EditAssets() {
         axios.put(`http://3.229.95.193:8080/assets/${id}`, data)
             .then(response => {
                 // Handle success
-                // console.log(response);
-                notify();
+                
+                notify(statuses[0].type,statuses[0].message);
 
             })
             .catch(error => {
                 // Handle error
-                console.error(error);
+                notify(statuses[1].type,statuses[1].message);
             });
     };
 
-    const notify = () => {
-        toast.success('Record Updated successfully!', {
+    const notify = (type,msg) => {
+        toast[type](msg, {
             position: "top-right",
             autoClose: 3000,
             hideProgressBar: false,
@@ -172,7 +174,7 @@ function EditAssets() {
                         </div>
                         <div className="row justify-content-end">
                             <div className='col-2 mb-2 p-1'>
-                                <button type='submit' className="btn btn-outline-primary">Add</button>
+                                <button type='submit' className="btn btn-outline-primary">Update</button>
                             </div>
                             <div className='col-3 mb-2 p-1'>
                                 <button type='reset' className="btn btn-outline-secondary" onClick={handleReset}>Cancel</button>

@@ -6,9 +6,9 @@ import { Form } from 'react-bootstrap';
 function AddAssets() {
     const [validated, setValidated] = useState(false);
 
-    const [value1, setValue1] = React.useState("");
-    const [value2, setValue2] = React.useState("");
-    const [value3, setValue3] = React.useState("");
+    const [value1, setValue1] = useState("");
+    const [value2, setValue2] = useState("");
+    const [value3, setValue3] = useState("");
     const handleClick = (val) => {
         setValue1("");
         setValue2("");
@@ -43,7 +43,7 @@ function AddAssets() {
             <div className='flex-grow-1'>
                 <Topbar/>
                 <div className='container p-4 mb-5 mx-auto mt-5 rounded bg-light shadow' style={{ width: 500 }}>
-                    <Form noValidate validated={validated} onSubmit={handleSubmit} method='post'>
+                    <Form noValidate validated={validated} onSubmit={handleSubmit} method='get'>
                         <h3 className='text-center mb-4'>Add Asset</h3>
                         <div className='row justify-content-md-center'>
                             <div className="col-4 mb-2 p-1">
@@ -82,6 +82,8 @@ function AddAssets() {
                                 </Form.Select>
                             </div>
                         </div>
+
+
                         <div className='row justify-content-md-center'>
                             <div className="col-4 mb-2 p-1">
                                 <label  className=''>User ID</label>
@@ -105,7 +107,7 @@ function AddAssets() {
                                 <button type='submit' className="btn btn-outline-primary">Add</button>
                             </div>
                             <div className='col-3 mb-2 p-1'>
-                                <button onClick={handleClick} type='reset' className="btn btn-outline-secondary">Clear</button>
+                                <button onClick={handleClick} className="btn btn-outline-secondary">Clear</button>
                             </div>
                         </div>
                     </Form>

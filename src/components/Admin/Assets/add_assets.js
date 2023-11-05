@@ -138,12 +138,6 @@ function AddAssets() {
         { value: 'bench', label: 'Bench' },
 
     ];
-    // const state = [
-    //     { value: 'in use', label: 'In use' },
-    //     { value: 'under maintenance', label: 'Under maintenance' },
-    //     { value: 'out of service', label: 'Out of service' },
-
-    // ];
 
     return (
         <div className='d-flex'>

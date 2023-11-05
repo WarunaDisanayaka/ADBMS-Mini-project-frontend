@@ -1,8 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
-
-
+import { useNavigate } from 'react-router-dom';
 
 const AssetTable = ({ columns, data }) => {
 
@@ -11,9 +10,9 @@ const AssetTable = ({ columns, data }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [id, setId] = useState('');
+    
 
-
-
+    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -37,7 +36,7 @@ const AssetTable = ({ columns, data }) => {
         }
     };
 
-
+    
 
 
     const handlePageChange = (pageNumber) => {
@@ -45,8 +44,8 @@ const AssetTable = ({ columns, data }) => {
     };
 
     const handleEditButtonClick = (index) => {
-        // const row = data[index];
-        // navigate('/edit_room', { state: row });
+         const row = data[index];
+         navigate('/edit_assets', { state: row });
     };
 
 

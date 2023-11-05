@@ -85,8 +85,8 @@ function AddUsers() {
                 <Form.Control type='text' placeholder='Username' className='form-control' onChange={handleChange1} value={value1} required />
               </div>
               <div className='mb-2 p-1'>
-                <label htmlFor='fullrname' className='mb-2'>Full_rname</label>
-                <Form.Control type='text' placeholder='Enter Fullrname' className='form-control' onChange={handleChange2} value={value2} required />
+                <label htmlFor='fullname' className='mb-2'>Full name</label>
+                <Form.Control type='text' placeholder='Enter Fullname' className='form-control' onChange={handleChange2} value={value2} required />
               </div>
               <div className='mb-2 p-1'>
                 <label htmlFor='regno' className='mb-2'>Register Number</label>

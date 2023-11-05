@@ -22,8 +22,10 @@ function AddAssets() {
         if (form.checkValidity() === false) {
             event.preventDefault();
             event.stopPropagation();
+            setValidated(true);
         }else{
             event.preventDefault();
+            
             const number1= Math.floor(100 + Math.random() * 999);
             const number2= Math.floor(100 + Math.random() * 999);
             const uniqueID = number1.toString() + number2.toString();
@@ -42,12 +44,20 @@ function AddAssets() {
             };
 
             sendData(formdata);
-            
+            setName([]);
+            setRoomId([]);
+            setValidated(false);
 
 
         }
-        setValidated(true);
         
+        
+    };
+
+    const handleReset = () => {
+        setName([]);
+        setRoomId([]);
+        setValidated(false);
     };
 
     const sendData = (data) => {
@@ -133,33 +143,14 @@ function AddAssets() {
                                     value={name}
                                     onChange={setName}
                                 />
-                                {validated && !name && (
+                                {validated && name.length===0 && (
                                     <div className="invalid-feedback d-block">
                                         Please select an option.
                                     </div>
                                 )}
                             </div>
                         </div>
-                        {/* <div className='row justify-content-md-center'>
-                            <div className="col-4 mb-2 p-1">
-                                <label className=''>Status</label>
-                            </div>
-
-                            <div className='col-6 mb-2 p-1'>
-                                <Select
-                                    isSearchable={false}
-                                    required
-                                    options={state}
-                                    value={status}
-                                    onChange={setStatus}
-                                />
-                                {validated && !status && (
-                                    <div className="invalid-feedback d-block">
-                                        Please select an option.
-                                    </div>
-                                )}
-                            </div>
-                        </div> */}
+                        
                         <div className='row justify-content-md-center'>
                             <div className="col-4 mb-2 p-1">
                                 <label className=''>Room ID</label>
@@ -172,7 +163,7 @@ function AddAssets() {
                                     value={roomid}
                                     onChange={setRoomId}
                                 />
-                                {validated && !roomid && (
+                                {validated && roomid.length===0 && (
                                     <div className="invalid-feedback d-block">
                                         Please select an option.
                                     </div>
@@ -184,7 +175,7 @@ function AddAssets() {
                                 <button type='submit' className="btn btn-outline-primary">Add</button>
                             </div>
                             <div className='col-3 mb-2 p-1'>
-                                <button type='reset' className="btn btn-outline-secondary">Cancel</button>
+                                <button type='reset' className="btn btn-outline-secondary" onClick={handleReset}>Cancel</button>
                             </div>
                         </div>
                     </Form>

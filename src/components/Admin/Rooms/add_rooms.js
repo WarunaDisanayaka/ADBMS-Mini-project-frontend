@@ -32,7 +32,7 @@ function AddRooms() {
                 floor: formData.get('floor'),
                 roomType: formData.get('roomType')
             };
-            console.log(jsonData);
+        
             sendData(jsonData);
 
             setValidated(false);

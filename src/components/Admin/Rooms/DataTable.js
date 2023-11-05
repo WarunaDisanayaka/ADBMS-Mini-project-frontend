@@ -8,7 +8,6 @@ const DataTable = ({ columns, data }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    // const navigate = useNavigate();
     const [id, setId] = useState('');
 
     useEffect(() => {
@@ -36,10 +35,6 @@ const DataTable = ({ columns, data }) => {
         setCurrentPage(pageNumber);
     };
 
-    // const handleEditButtonClick = (index) => {
-    //     const row = data[index];
-    //    navigate('/edit_room',{state: row});
-    // };
 
 
 
@@ -63,31 +58,11 @@ const DataTable = ({ columns, data }) => {
         setShow(false);
     };
 
-    const renderPagination = () => {
-        const indexOfLastRow = currentPage * rowsPerPage;
-        const indexOfFirstRow = indexOfLastRow - rowsPerPage;
-        
-    
-        return (
-            <ul className="pagination">
-            {Array.from({ length: Math.ceil(filteredData.length / rowsPerPage) }, (_, index) => index + 1).map(
-                (pageNumber) => (
-                    <li
-                        key={pageNumber}
-                        className={`page-item ${currentPage === pageNumber ? "active" : ""}`}
-                    >
-                        <button
-                            className="page-link"
-                            onClick={() => handlePageChange(pageNumber)}
-                        >
-                            {pageNumber}
-                        </button>
-                    </li>
-                )
-            )}
-        </ul>
-    );
-};
+
+    const indexOfLastRow = currentPage * rowsPerPage;
+    const indexOfFirstRow = indexOfLastRow - rowsPerPage;
+    const currentRows = filteredData.slice(indexOfFirstRow, indexOfLastRow);
+
 
 
     const [show, setShow] = useState(false);
@@ -96,7 +71,7 @@ const DataTable = ({ columns, data }) => {
 
 
     return (
-        <div className="container mt-5 mb-5">
+        <div className="container p-5 mt-5 mb-1 shadow-sm">
             <div className="d-flex justify-content-between mb-3">
 
                 <div className="form-inline ml-3">
@@ -134,7 +109,7 @@ const DataTable = ({ columns, data }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {filteredData.map((row, index) => (
+                        {currentRows.map((row, index) => (
                             <tr key={index}>
                                 {columns.map((col) => (
                                     <td key={col.dataKey}>{row[col.dataKey]}</td>
@@ -154,7 +129,23 @@ const DataTable = ({ columns, data }) => {
             </div>
 
             <div className="pagination-container d-flex justify-content-end mt-3">
-                {renderPagination()}
+                <ul className="pagination">
+                    {Array.from({ length: Math.ceil(filteredData.length / rowsPerPage) }, (_, index) => index + 1).map(
+                        (pageNumber) => (
+                            <li
+                                key={pageNumber}
+                                className={`page-item ${currentPage === pageNumber ? "active" : ""}`}
+                            >
+                                <button
+                                    className="page-link"
+                                    onClick={() => handlePageChange(pageNumber)}
+                                >
+                                    {pageNumber}
+                                </button>
+                            </li>
+                        )
+                    )}
+                </ul>
             </div>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>

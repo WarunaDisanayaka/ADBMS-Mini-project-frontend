@@ -6,6 +6,25 @@ import { Form } from 'react-bootstrap';
 function AddAssets() {
     const [validated, setValidated] = useState(false);
 
+    const [value1, setValue1] = React.useState("");
+    const [value2, setValue2] = React.useState("");
+    const [value3, setValue3] = React.useState("");
+    const handleClick = (val) => {
+        setValue1("");
+        setValue2("");
+        setValue3("");
+    };
+
+    const handleChange1 = (event) => {
+        setValue1(event.target.value);
+    };
+    const handleChange2 = (event) => {
+        setValue2(event.target.value);
+    };
+    const handleChange3 = (event) => {
+        setValue3(event.target.value);
+    };
+
     const handleSubmit = (event) => {
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
@@ -33,7 +52,7 @@ function AddAssets() {
 
                             <div className='col-6 mb-2 p-1'>
 
-                                <Form.Select required name="assetname"
+                                <Form.Select required name="assetname" onChange={handleChange1} value={value1}
                                     // value={hostal}
                                     // onChange={(e) => setHostal(e.target.value)}
                                 >
@@ -50,7 +69,7 @@ function AddAssets() {
                             </div>
 
                             <div className='col-6 mb-2 p-1'>
-                                <Form.Select required name="status"
+                                <Form.Select required name="status" onChange={handleChange2} value={value2}
                                     // value={floor}
                                     // onChange={(e) => setFloor(e.target.value)}
                                 >
@@ -70,7 +89,7 @@ function AddAssets() {
 
                             <div className='col-6 mb-2 p-1'>
 
-                                <Form.Select required name="userid"
+                                <Form.Select required name="userid" onChange={handleChange3} value={value3}
                                     // value={roomType}
                                     // onChange={(e) => setRoomType(e.target.value)}
                                 >
@@ -86,7 +105,7 @@ function AddAssets() {
                                 <button type='submit' className="btn btn-outline-primary">Add</button>
                             </div>
                             <div className='col-3 mb-2 p-1'>
-                                <button type='reset' className="btn btn-outline-secondary">Cancel</button>
+                                <button onClick={handleClick} type='reset' className="btn btn-outline-secondary">Clear</button>
                             </div>
                         </div>
                     </Form>

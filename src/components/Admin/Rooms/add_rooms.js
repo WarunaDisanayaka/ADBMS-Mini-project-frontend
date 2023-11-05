@@ -32,7 +32,7 @@ function AddRooms() {
                 floor: formData.get('floor'),
                 roomType: formData.get('roomType')
             };
-        
+
             sendData(jsonData);
 
             setValidated(false);
@@ -45,7 +45,7 @@ function AddRooms() {
     };
 
     const resetForm = () => {
-       
+
         setHostal('');
         setFloor('');
         setRoomType('');

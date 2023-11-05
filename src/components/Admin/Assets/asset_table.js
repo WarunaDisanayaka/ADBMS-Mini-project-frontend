@@ -1,36 +1,40 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+
 
 
 const AssetTable = ({ columns, data }) => {
+
     const [filteredData, setFilteredData] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    const navigate = useNavigate();
-    const [id,setId] = useState('');
+    const [id, setId] = useState('');
+
+
 
 
 
     useEffect(() => {
         setFilteredData(data);
+
     }, [data]);
 
     const handleSearch = (event) => {
         const term = event.target.value.trim().toLowerCase();
         setSearchTerm(term);
 
-        const filteredData = data.filter(
-            (row) =>
-                columns.some(
-                    (col) =>
-                        row[col.dataKey].toString().toLowerCase().includes(term)
-                )
-        );
-        setFilteredData(filteredData);
-
+        if (data) {
+            const filteredData = data.filter(
+                (row) =>
+                    columns.some(
+                        (col) =>
+                            row[col.dataKey] && row[col.dataKey].toString().toLowerCase().includes(term)
+                    )
+            );
+            setFilteredData(filteredData);
+        }
     };
 
 
@@ -51,12 +55,29 @@ const AssetTable = ({ columns, data }) => {
         setShow(true);
     };
 
+    const getQrPath = (path) => {
+
+        const partsArray = path.split('/');
+        const filename = partsArray[partsArray.length - 1];
+        console.log(filename);
+
+        const fileurl = `http://3.229.95.193:8080/images/${filename}`;
+
+        // const handleImageClick = (path) => {
+        //     setShow2(true);
+        //     setImageUrl(path);
+        // }
+        return <img src={fileurl} alt="Asset" style={{ width: '50px', height: '50px' }} />;
+    };
+
+
+
     const handleDelete = () => {
         axios
             .delete(`http://3.229.95.193:8080/assets/${id}`)
             .then(response => {
                 // Handle success
-                console.log(response);
+
                 window.location.reload();
             })
             .catch(error => {
@@ -66,35 +87,17 @@ const AssetTable = ({ columns, data }) => {
         setShow(false);
     };
 
-
-
-    const renderPagination = () => {
-        const pageNumbers = Math.ceil(filteredData.length / rowsPerPage);
-        return (
-            <ul className="pagination">
-                {Array.from({ length: pageNumbers }, (_, index) => index + 1).map(
-                    (pageNumber) => (
-                        <li
-                            key={pageNumber}
-                            className={`page-item ${currentPage === pageNumber ? "active" : ""
-                                }`}
-                        >
-                            <button
-                                className="page-link"
-                                onClick={() => handlePageChange(pageNumber)}
-                            >
-                                {pageNumber}
-                            </button>
-                        </li>
-                    )
-                )}
-            </ul>
-        );
-    };
+    const indexOfLastRow = currentPage * rowsPerPage;
+    const indexOfFirstRow = indexOfLastRow - rowsPerPage;
+    const currentRows = filteredData.slice(indexOfFirstRow, indexOfLastRow);
 
     const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
+    const [show2, setShow2] = useState(false);
+    const [imageUrl, setImageUrl] = useState('');
+    const handleClose = () => {
+        setShow(false);
+        setShow2(false);
+    };
 
     return (
         <div className="container mt-5 mb-5">
@@ -123,7 +126,6 @@ const AssetTable = ({ columns, data }) => {
                     />
                 </div>
             </div>
-
             <div className="table-responsive">
                 <table className="table table-bordered table-hover">
                     <thead className="thead-dark">
@@ -135,11 +137,14 @@ const AssetTable = ({ columns, data }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {filteredData.map((row, index) => (
+                        {currentRows.map((row, index) => (
                             <tr key={index}>
-                                {columns.map((col) => (
+                                {columns.slice(0, -1).map((col) => (
                                     <td key={col.dataKey}>{row[col.dataKey]}</td>
                                 ))}
+                                <td className='p-2'>
+                                    {getQrPath(row.qrCodePath)}
+                                </td>
                                 <td className='p-2'>
                                     <button
                                         className="btn btn-outline-primary btn-sm ml"
@@ -160,11 +165,26 @@ const AssetTable = ({ columns, data }) => {
                 </table>
             </div>
 
-            <div className="pagination-container d-flex justify-content-end mt-3">
-                {renderPagination()}
-            </div>
+            <ul className="pagination">
+                {Array.from({ length: Math.ceil(filteredData.length / rowsPerPage) }, (_, index) => index + 1).map(
+                    (pageNumber) => (
+                        <li
+                            key={pageNumber}
+                            className={`page-item ${currentPage === pageNumber ? "active" : ""}`}
+                        >
+                            <button
+                                className="page-link"
+                                onClick={() => handlePageChange(pageNumber)}
+                            >
+                                {pageNumber}
+                            </button>
+                        </li>
+                    )
+                )}
+            </ul>
+            
 
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={show} onHide={handleClose} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Delete Confirmation</Modal.Title>
                 </Modal.Header>

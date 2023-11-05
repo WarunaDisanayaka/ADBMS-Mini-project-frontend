@@ -61,23 +61,23 @@ const AssetTable = ({ columns, data }) => {
         const filename = partsArray[partsArray.length - 1];
 
         const fileurl = `http://3.229.95.193:8080/images/${filename}`;
-        
+
         const downloadQrCode = () => {
             fetch(fileurl)
-              .then((response) => response.blob())
-              .then((blob) => {
-                const url = window.URL.createObjectURL(new Blob([blob]));
-                const link = document.createElement('a');
-                link.href = url;
-                link.setAttribute('download', filename);
-                document.body.appendChild(link);
-                link.click();
-                link.parentNode.removeChild(link);
-              });
-          };
+                .then((response) => response.blob())
+                .then((blob) => {
+                    const url = window.URL.createObjectURL(new Blob([blob]));
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', filename);
+                    document.body.appendChild(link);
+                    link.click();
+                    link.parentNode.removeChild(link);
+                });
+        };
 
 
-     
+
         return <a href="#" onClick={downloadQrCode} title="Download QR Code"><img src={fileurl} alt="Asset" style={{ width: '50px', height: '50px' }} /></a>;
     };
 
@@ -195,7 +195,7 @@ const AssetTable = ({ columns, data }) => {
                     )}
                 </ul>
             </div>
-            
+
 
             <Modal show={show} onHide={handleClose} centered>
                 <Modal.Header closeButton>

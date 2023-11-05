@@ -6,14 +6,35 @@ import Select from 'react-select';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
-import { format } from 'date-fns';
+import { useLocation } from 'react-router';
 
-function AddAssets() {
+
+function EditAssets() {
+    const names = [
+        { value: 'table', label: 'table' },
+        { value: 'Chair', label: 'chair' },
+        { value: 'light', label: 'Light' },
+        { value: 'fan', label: 'Fan' },
+        { value: 'clothrack', label: 'Cloth_rack' },
+        { value: 'cupboard', label: 'Cupboard' },
+        { value: 'bench', label: 'Bench' },
+
+    ];
+
+
+    const location = useLocation();
+    const props = location.state;
+
+
     const [validated, setValidated] = useState(false);
     const [name, setName] = useState([]);
     const [roomid, setRoomId] = useState([]);
     const [idlist, setIdList] = useState([]);
-    const status = "in use";
+
+    const getLabelFromValue = (value, array) => {
+        const foundItem = array.find(item => item.value === value);
+        return foundItem ? foundItem : null;
+    };
 
 
 
@@ -26,24 +47,14 @@ function AddAssets() {
         } else {
             event.preventDefault();
 
-            const number1 = Math.floor(100 + Math.random() * 999);
-            const number2 = Math.floor(100 + Math.random() * 999);
-            const uniqueID = number1.toString() + number2.toString();
-
-            const now = new Date();
-            const date = format(now, 'yyyy-MM-dd');
-
-
 
             const formdata = {
-                assetsId: uniqueID,
                 name: name.value,
-                status: status,
                 roomId: roomid.value,
-                addedDate: date
             };
 
-            sendData(formdata);
+
+            updateData(props.assetsId, formdata);
             setName([]);
             setRoomId([]);
             setValidated(false);
@@ -60,11 +71,11 @@ function AddAssets() {
         setValidated(false);
     };
 
-    const sendData = (data) => {
-        axios.post('http://3.229.95.193:8080/assets/', data)
+    const updateData = (id, data) => {
+        axios.put(`http://3.229.95.193:8080/assets/${id}`, data)
             .then(response => {
                 // Handle success
-                console.log(response);
+                // console.log(response);
                 notify();
 
             })
@@ -75,9 +86,9 @@ function AddAssets() {
     };
 
     const notify = () => {
-        toast.success('Record created successfully!', {
+        toast.success('Record Updated successfully!', {
             position: "top-right",
-            autoClose: 4000,
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -93,32 +104,21 @@ function AddAssets() {
         axios.get('http://3.229.95.193:8080/rooms/get-all-room-ids')
             .then(response => {
                 // Handle success
-                const formattedList = response.data.map(id => ({ value: id, label: id }));
-                setIdList(formattedList);
+                const formattedListData = response.data.map(id => ({ value: id, label: id }));
+                setIdList(formattedListData);
+                setRoomId(getLabelFromValue(props.roomId, formattedListData));
             })
             .catch(error => {
                 // Handle error
                 console.error('Error fetching room data:', error);
             });
-        // console.log(idlist);
-    }, []);
+        setName(getLabelFromValue(props.name, names));
+    }, [props.name]);
 
-    const names = [
-        { value: 'table', label: 'table' },
-        { value: 'Chair', label: 'chair' },
-        { value: 'light', label: 'Light' },
-        { value: 'fan', label: 'Fan' },
-        { value: 'clothrack', label: 'Cloth_rack' },
-        { value: 'cupboard', label: 'Cupboard' },
-        { value: 'bench', label: 'Bench' },
+    const setRoom = () => {
+        setRoomId(getLabelFromValue(props.roomId, idlist));
+    };
 
-    ];
-    // const state = [
-    //     { value: 'in use', label: 'In use' },
-    //     { value: 'under maintenance', label: 'Under maintenance' },
-    //     { value: 'out of service', label: 'Out of service' },
-
-    // ];
 
     return (
         <div className='d-flex'>
@@ -187,4 +187,4 @@ function AddAssets() {
     );
 }
 
-export default AddAssets;
+export default EditAssets;

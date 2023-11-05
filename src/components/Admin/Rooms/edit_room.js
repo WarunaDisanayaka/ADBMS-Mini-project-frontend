@@ -14,9 +14,9 @@ function EditRooms() {
     const [hostal, setHostal] = useState(props.hostal || '');
     const [floor, setFloor] = useState(props.floor || '');
     const [roomType, setRoomType] = useState(props.roomType || '');
-    const [roomno,setRoomNo] = useState(props.roomNo || '');
+    const [roomno, setRoomNo] = useState(props.roomNo || '');
 
-    
+
 
     const handleSubmit = (event) => {
         const form = event.currentTarget;
@@ -38,7 +38,7 @@ function EditRooms() {
                 roomType: formData.get('roomType')
             };
             console.log(jsonData);
-            sendData(roomId,jsonData);
+            sendData(roomId, jsonData);
 
             setValidated(false);
             form.reset();
@@ -51,9 +51,9 @@ function EditRooms() {
 
     };
 
- 
 
-    const sendData = (id,data) => {
+
+    const sendData = (id, data) => {
         axios.post('http://localhost:8080/rooms/update-room/${id}', data)
             .then(response => {
                 // Handle success
@@ -85,7 +85,7 @@ function EditRooms() {
 
                             <div className='col-6 mb-2 p-1'>
 
-                                <Form.Select required 
+                                <Form.Select required
                                     value={hostal}
                                     onChange={(e) => setHostal(e.target.value)}
                                     disabled
@@ -156,7 +156,7 @@ function EditRooms() {
                                 <button type='reset' className="btn btn-outline-secondary">Cancel</button>
                             </div>
                         </div>
-                    </Form> 
+                    </Form>
                 </div>
 
 

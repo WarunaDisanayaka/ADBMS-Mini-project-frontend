@@ -1,8 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
-
-
+import { useNavigate } from 'react-router-dom';
 
 const AssetTable = ({ columns, data }) => {
 
@@ -11,9 +10,9 @@ const AssetTable = ({ columns, data }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [id, setId] = useState('');
+    
 
-
-
+    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -37,7 +36,7 @@ const AssetTable = ({ columns, data }) => {
         }
     };
 
-
+    
 
 
     const handlePageChange = (pageNumber) => {
@@ -45,8 +44,8 @@ const AssetTable = ({ columns, data }) => {
     };
 
     const handleEditButtonClick = (index) => {
-        // const row = data[index];
-        // navigate('/edit_room', { state: row });
+         const row = data[index];
+         navigate('/edit_assets', { state: row });
     };
 
 
@@ -61,23 +60,23 @@ const AssetTable = ({ columns, data }) => {
         const filename = partsArray[partsArray.length - 1];
 
         const fileurl = `http://3.229.95.193:8080/images/${filename}`;
-        
+
         const downloadQrCode = () => {
             fetch(fileurl)
-              .then((response) => response.blob())
-              .then((blob) => {
-                const url = window.URL.createObjectURL(new Blob([blob]));
-                const link = document.createElement('a');
-                link.href = url;
-                link.setAttribute('download', filename);
-                document.body.appendChild(link);
-                link.click();
-                link.parentNode.removeChild(link);
-              });
-          };
+                .then((response) => response.blob())
+                .then((blob) => {
+                    const url = window.URL.createObjectURL(new Blob([blob]));
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', filename);
+                    document.body.appendChild(link);
+                    link.click();
+                    link.parentNode.removeChild(link);
+                });
+        };
 
 
-     
+
         return <a href="#" onClick={downloadQrCode} title="Download QR Code"><img src={fileurl} alt="Asset" style={{ width: '50px', height: '50px' }} /></a>;
     };
 
@@ -195,7 +194,7 @@ const AssetTable = ({ columns, data }) => {
                     )}
                 </ul>
             </div>
-            
+
 
             <Modal show={show} onHide={handleClose} centered>
                 <Modal.Header closeButton>

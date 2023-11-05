@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
+import { toast } from 'react-toastify';
 
 
 const DataTable = ({ columns, data }) => {
@@ -43,17 +44,29 @@ const DataTable = ({ columns, data }) => {
         setShow(true);
     };
 
+    const notify = () => {
+        toast.error("Error occurred.", {
+          position: 'top-right',
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'light',
+        });
+      };
+
     const handleDelete = () => {
         axios
             .delete(`http://3.229.95.193:8080/rooms/delete-room/${id}`)
             .then(response => {
                 // Handle success
-                console.log(response);
                 window.location.reload();
             })
             .catch(error => {
                 // Handle error
-                console.error(error);
+                notify();
             });
         setShow(false);
     };

@@ -3,6 +3,7 @@ import DataTable from './DataTable';
 import Sidebar from '../Sidebar';
 import Topbar from '../../Topbar';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 
 
@@ -18,6 +19,19 @@ const ViewRooms = () => {
     ];
     const [roomdata, setRoomData] = useState([]);
 
+    const notify = () => {
+        toast.error("Error occurred.", {
+          position: 'top-right',
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'light',
+        });
+      };
+
     useEffect(() => {
         // Fetch data from the API
         axios.get('http://3.229.95.193:8080/rooms/get-all-rooms')
@@ -28,7 +42,7 @@ const ViewRooms = () => {
             })
             .catch(error => {
                 // Handle error
-                console.error('Error fetching room data:', error);
+                notify();
             });
     }, []);
 

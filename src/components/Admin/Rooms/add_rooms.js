@@ -13,6 +13,12 @@ function AddRooms() {
     const [floor, setFloor] = useState('');
     const [roomType, setRoomType] = useState('');
 
+    const [statuses] = useState([
+        { type: 'success', message: 'Record created successfully!' },
+        { type: 'error', message: 'Error: creation failed.' },
+      ]);
+	  
+
     const handleSubmit = (event) => {
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
@@ -51,10 +57,10 @@ function AddRooms() {
         setRoomType('');
     };
 
-    const notify = () => {
-        toast.success('Record created successfully!', {
+    const notify = (type,msg) => {
+        toast[type](msg, {
             position: "top-right",
-            autoClose: 4000,
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -71,12 +77,12 @@ function AddRooms() {
             .then(response => {
                 // Handle success
                 console.log(response);
-                notify();
+                notify(statuses[0].type,statuses[0].message);
+	  
 
             })
             .catch(error => {
-                // Handle error
-                console.error(error);
+                notify(statuses[1].type,statuses[1].message);
             });
     };
 

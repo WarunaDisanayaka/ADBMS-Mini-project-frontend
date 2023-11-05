@@ -59,15 +59,26 @@ const AssetTable = ({ columns, data }) => {
 
         const partsArray = path.split('/');
         const filename = partsArray[partsArray.length - 1];
-        console.log(filename);
 
         const fileurl = `http://3.229.95.193:8080/images/${filename}`;
+        
+        const downloadQrCode = () => {
+            fetch(fileurl)
+              .then((response) => response.blob())
+              .then((blob) => {
+                const url = window.URL.createObjectURL(new Blob([blob]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', filename);
+                document.body.appendChild(link);
+                link.click();
+                link.parentNode.removeChild(link);
+              });
+          };
 
-        // const handleImageClick = (path) => {
-        //     setShow2(true);
-        //     setImageUrl(path);
-        // }
-        return <img src={fileurl} alt="Asset" style={{ width: '50px', height: '50px' }} />;
+
+     
+        return <a href="#" onClick={downloadQrCode} title="Download QR Code"><img src={fileurl} alt="Asset" style={{ width: '50px', height: '50px' }} /></a>;
     };
 
 
@@ -100,10 +111,10 @@ const AssetTable = ({ columns, data }) => {
     };
 
     return (
-        <div className="container mt-5 mb-5">
+        <div className="container mt-5 mb-1 shadow-sm">
             <div className="d-flex justify-content-between mb-3">
 
-                <div className="form-inline ml-3">
+                <div className="form-inline ml-3 mt-2">
                     <label className="mr-2">Rows per page:</label>
                     <select
                         className="form-control"
@@ -116,7 +127,7 @@ const AssetTable = ({ columns, data }) => {
                         <option>50</option>
                     </select>
                 </div>
-                <div className="search-container">
+                <div className="search-container mt-2">
                     <input
                         type="text"
                         className="form-control"
@@ -165,23 +176,25 @@ const AssetTable = ({ columns, data }) => {
                 </table>
             </div>
 
-            <ul className="pagination">
-                {Array.from({ length: Math.ceil(filteredData.length / rowsPerPage) }, (_, index) => index + 1).map(
-                    (pageNumber) => (
-                        <li
-                            key={pageNumber}
-                            className={`page-item ${currentPage === pageNumber ? "active" : ""}`}
-                        >
-                            <button
-                                className="page-link"
-                                onClick={() => handlePageChange(pageNumber)}
+            <div className="pagination-container d-flex justify-content-end mt-3">
+                <ul className="pagination">
+                    {Array.from({ length: Math.ceil(filteredData.length / rowsPerPage) }, (_, index) => index + 1).map(
+                        (pageNumber) => (
+                            <li
+                                key={pageNumber}
+                                className={`page-item ${currentPage === pageNumber ? "active" : ""}`}
                             >
-                                {pageNumber}
-                            </button>
-                        </li>
-                    )
-                )}
-            </ul>
+                                <button
+                                    className="page-link"
+                                    onClick={() => handlePageChange(pageNumber)}
+                                >
+                                    {pageNumber}
+                                </button>
+                            </li>
+                        )
+                    )}
+                </ul>
+            </div>
             
 
             <Modal show={show} onHide={handleClose} centered>

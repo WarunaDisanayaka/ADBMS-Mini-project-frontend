@@ -3,6 +3,8 @@ import axios from 'axios';
 import Sidebar from '../Sidebar';
 import Topbar from '../../Topbar';
 import { Form } from 'react-bootstrap';
+import { auto } from '@popperjs/core';
+import { toast } from 'react-toastify';
 
 function AddUsers() {
   const [validated, setValidated] = useState(false);
@@ -11,6 +13,11 @@ function AddUsers() {
   const [value3, setValue3] = useState("");
   const [value4, setValue4] = useState("");
   const [value5, setValue5] = useState("");
+
+  const [statuses] = useState([
+    { type: 'success', message: 'Record created successfully!' },
+    { type: 'error', message: 'Error creation failed.' },
+  ]);
 
   const handleClick = () => {
     setValue1("");
@@ -46,27 +53,49 @@ function AddUsers() {
       event.preventDefault();
       event.stopPropagation();
     } else {
-      try {
-        const response = await axios.post('/api/users', {
-          username: value1,
-          fullrname: value2,
-          regno: value3,
-          password: value4,
-          role_id: value5,
-        });
-
-        if (response.status === 201) {
-          console.log('User added successfully');
-          handleClick(); // Clear form values
-        } else {
-          console.error('Failed to add user');
-        }
-      } catch (error) {
-        console.error('Error:', error);
+      event.preventDefault();
+      const formdata = {
+        username: value1,
+        fullName: value2,
+        regNo: value3,
+        password: value4,
+        roleId: value5
       }
+      console.log(formdata);
+      sendData(formdata);
+      handleClick();
+      setValidated(false);
     }
-    setValidated(true);
+    
   };
+
+  const notify = (type, msg) => {
+    toast[type](msg, {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+
+  };
+  const sendData = (data) =>{
+
+    
+  axios.post('http://3.229.95.193:8080/users/',data)
+  .then(response => {
+    // Handle success
+    notify(statuses[0].type, statuses[0].message);
+
+  })
+  .catch(error => {
+    // Handle error
+    notify(statuses[1].type, statuses[1].message);
+  });
+};
 
   return (
     <div className='d-flex'>
@@ -76,33 +105,33 @@ function AddUsers() {
       <div className='flex-grow-1'>
         <Topbar />
 
-        <div className="login template d-flex justify-content-center align-items-center vh-100 bg-light">
-          <div className='form_container shadow p-5 mb-5 rounded bg-white'>
-            <Form noValidate validated={validated} onSubmit={handleSubmit} method=''>
+        <div className="login template d-flex justify-content-center align-items-center vh-100 bg-light" >
+          <div className='form_container shadow p-5 mb-2 rounded bg-white'>
+            <Form noValidate validated={validated} onSubmit={handleSubmit} method='post'>
               <h3 className='text-center'>Add User</h3>
-              <div className='mb-2 p-1'>
-                <label htmlFor='username' className='mb-2'>User name</label>
+              <div className='mb-1 p-1'>
+                <label htmlFor='username' className='mb-1'>User name</label>
                 <Form.Control type='text' placeholder='Username' className='form-control' onChange={handleChange1} value={value1} required />
               </div>
-              <div className='mb-2 p-1'>
-                <label htmlFor='fullname' className='mb-2'>Full name</label>
+              <div className='mb-1 p-1'>
+                <label htmlFor='fullname' className='mb-1'>Full name</label>
                 <Form.Control type='text' placeholder='Enter Fullname' className='form-control' onChange={handleChange2} value={value2} required />
               </div>
-              <div className='mb-2 p-1'>
-                <label htmlFor='regno' className='mb-2'>Register Number</label>
-                <Form.Control type='text' placeholder='Enter Register Number' className='form-control' onChange={handleChange3} value={value3} required />
+              <div className='mb-1 p-1'>
+                <label htmlFor='regno' className='mb-1'>Registration Number</label>
+                <Form.Control type='text' placeholder='Enter Registration Number' className='form-control' onChange={handleChange3} value={value3} required />
               </div>
-              <div className='mb-2 p-1'>
-                <label htmlFor='password' className='mb-2'>Password</label>
+              <div className='mb-1 p-1'>
+                <label htmlFor='password' className='mb-1'>Password</label>
                 <Form.Control type='password' placeholder='Password' className='form-control' onChange={handleChange4} value={value4} required />
               </div>
-              <div className='mb-2 p-1'>
-                <label htmlFor='role_id' className='mb-2'>Role ID</label>
+              <div className='mb-1 p-1'>
+                <label htmlFor='role_id' className='mb-1'>Role</label>
                 <Form.Select required className="roleId" onChange={handleChange5} value={value5}>
-                  <option disabled selected value="">Role ID...</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+                  <option disabled selected value="">Select role...</option>
+                  <option value="1">Student</option>
+                  <option value="2">Warden</option>
+                  <option value="3">Sub-Warden</option>
                 </Form.Select>
               </div>
               <div className="d-grid ">

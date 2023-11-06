@@ -37,7 +37,7 @@ function ViewComplaints() {
   // Handle changing the status of a complaint
 const handleStatusChange = (complaint, newStatus) => {
     // Make a PUT request to update the status of the complaint
-    axios.put(`http://localhost:8080/complains/${complaint.complainId}`, {
+    axios.put(`http://3.229.95.193:8080/complains/${complaint.complainId}`, {
       status: newStatus,
     })
       .then((response) => {

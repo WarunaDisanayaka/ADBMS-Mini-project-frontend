@@ -14,7 +14,7 @@ const Sidebar = () => {
         console.log('Logout button clicked'); // Add this log to check if the button is clicked
         Cookies.remove('userToken');
         console.log('User token removed'); // Add this log to check if the user token is removed
-        navigate("/add_asset"); // Use navigate to go to the desired route
+        navigate("/"); // Use navigate to go to the desired route
         console.log('Navigate to root');
     };
     
@@ -109,10 +109,10 @@ const Sidebar = () => {
 
             <div className="text-center d-none d-md-inline">
             <div className="text-center d-none d-md-inline">
-            <button onClick={handleLogout} className="btn btn-link" style={{ cursor: 'pointer' }}>
+            {/* <button onClick={handleLogout} className="btn btn-link" style={{ cursor: 'pointer' }}>
                 <i className="fas fa-fw fa-sign-out-alt"></i>
                 <span>Logout</span>
-            </button>
+            </button> */}
         </div>
       </div>
         </ul>

@@ -3,9 +3,21 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "../Assets/vendor/fontawesome-free/css/all.min.css";
 import "../Assets/css/sb-admin-2.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import { useNavigate } from 'react-router';
+import Cookies from 'js-cookie';
 
 
 const Topbar = () => {
+
+  const navigate = useNavigate(); // Initialize the navigate function
+
+    const handleLogout = () => {
+        console.log('Logout button clicked'); // Add this log to check if the button is clicked
+        Cookies.remove('userToken');
+        console.log('User token removed'); // Add this log to check if the user token is removed
+        navigate("/"); // Use navigate to go to the desired route
+        console.log('Navigate to root');
+    };
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white topbar static-top shadow">
       <button
@@ -36,10 +48,10 @@ const Topbar = () => {
             <ul className="dropdown-menu dropdown-menu-end shadow animated--grow-in" aria-labelledby="userDropdown">
              
               <li>
-                <a className="dropdown-item" href="/" data-bs-toggle="modal" data-bs-target="#logoutModal">
+                <button className="dropdown-item"  onClick={handleLogout} >
                   <i className="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>
                   Logout
-                </a>
+                </button>
               </li>
             </ul>
           </li>

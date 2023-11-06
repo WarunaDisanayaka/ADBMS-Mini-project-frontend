@@ -32,11 +32,12 @@ export default function Login() {
 
       if (response.ok) {
         const data = await response.json();
+        // console.log(data);
 
         if (data.authenticated && data.role === '3') {
           // Save the user's authentication information in a cookie
           Cookies.set('userToken', data.token);
-          navigate('/admin_dashboard');
+          navigate('/admin_dashboard', { state: { role: data.role } });
         } else {
           // Handle other cases or show an error message
           setError('Invalid username or password.');

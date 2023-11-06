@@ -3,6 +3,7 @@ import Topbar from '../Topbar';
 import Sidebar from './Sidebar';
 import { Card, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
+import { useLocation } from 'react-router';
 
 function Dashboard() {
   const [open, setOpen] = useState('');
@@ -10,6 +11,10 @@ function Dashboard() {
   const [repair, setRepair] = useState('');
   const [closed, setClosed] = useState('');
 
+  const location = useLocation();
+  const roleid = location.state;
+  
+  
   useEffect(() => {
     axios.post('http://3.229.95.193:8080/complains/openCount')
       .then((response) => {
@@ -55,7 +60,9 @@ function Dashboard() {
         <Sidebar />
       </div>
       <div className="flex-grow-1">
-        <Topbar />
+        <Topbar
+          roleid={roleid}
+         />
         <div className="p-4 mt-5">
           <Row xs={1} md={4} className="g-4">
             {[0, 1, 2, 3].map((index) => (

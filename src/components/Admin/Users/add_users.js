@@ -124,9 +124,10 @@ function AddUsers() {
                 <label htmlFor='role_id' className='mb-1'>Role</label>
                 <Form.Select required className="roleId" onChange={handleChange5} value={value5}>
                   <option disabled selected value="">Select role...</option>
-                  <option value="1">Student</option>
-                  <option value="2">Warden</option>
-                  <option value="3">Sub-Warden</option>
+                  <option value="3">Admin</option>
+                  <option value="4">Student</option>
+                  <option value="1">Warden</option>
+                  <option value="2">Sub-Warden</option>
                 </Form.Select>
               </div>
               <div className="d-grid ">

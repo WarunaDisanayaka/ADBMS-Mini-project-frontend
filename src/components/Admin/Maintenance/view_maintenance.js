@@ -8,10 +8,10 @@ import MaintenanceTable from './maintanance_table';
 
 function ViewMaintenance() {
     const columns = [
-        { label: 'Asset ID', dataKey: 'username' },
-        { label: 'Status', dataKey: 'fullName' },
-        { label: 'Registration NO', dataKey: 'regNo' },
-        { label: 'Role', dataKey: 'roleId' }
+        { label: 'Asset ID', dataKey: 'assetsId' },
+        { label: 'Status', dataKey: 'status' },
+        { label: 'Date', dataKey: 'date' },
+        { label: 'Image', dataKey: 'evidenceImage' }
         
         
 

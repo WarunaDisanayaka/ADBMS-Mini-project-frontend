@@ -6,7 +6,6 @@ import { Form } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import { auto } from '@popperjs/core';
 
-
 function AddUsers() {
   const [validated, setValidated] = useState(false);
   const [value1, setValue1] = useState("");
@@ -67,7 +66,6 @@ function AddUsers() {
       handleClick();
       setValidated();
     }
-    
   };
 
   const notify = (type, msg) => {
@@ -81,46 +79,19 @@ function AddUsers() {
       progress: undefined,
       theme: "light",
     });
-
   };
 
-
-  const sendData = (data) =>{ 
-      console.log(formdata);
-      sendData(formdata);
-      handleClick();
-      setValidated(false);
-    }
-    
+  const sendData = (data) => {
+    axios.post('http://3.229.95.193:8080/users/', data)
+      .then(response => {
+        // Handle success
+        notify(statuses[0].type, statuses[0].message);
+      })
+      .catch(error => {
+        // Handle error
+        notify(statuses[1].type, statuses[1].message);
+      });
   };
-
-  const notify = (type, msg) => {
-    toast[type](msg, {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
-
-  };
-  const sendData = (data) =>{
-
-    
-  axios.post('http://3.229.95.193:8080/users/',data)
-  .then(response => {
-    // Handle success
-    notify(statuses[0].type, statuses[0].message);
-
-  })
-  .catch(error => {
-    // Handle error
-    notify(statuses[1].type, statuses[1].message);
-  });
-
 
   return (
     <div className='d-flex'>
@@ -129,8 +100,7 @@ function AddUsers() {
       </div>
       <div className='flex-grow-1'>
         <Topbar />
-
-        <div className="login template d-flex justify-content-center align-items-center vh-100 bg-light" >
+        <div className="login template d-flex justify-content-center align-items-center vh-100 bg-light">
           <div className='form_container shadow p-5 mb-2 rounded bg-white'>
             <Form noValidate validated={validated} onSubmit={handleSubmit} method='post'>
               <h3 className='text-center'>Add User</h3>
@@ -170,6 +140,6 @@ function AddUsers() {
       <ToastContainer/>
     </div>
   );
-  };
+}
 
 export default AddUsers;

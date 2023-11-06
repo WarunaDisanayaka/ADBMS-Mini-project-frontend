@@ -90,6 +90,10 @@ function App() {
           path="/edit_assets"
           element={<ProtectedRoute element={<EditAssets />} path="/edit_assets" />}
         />
+         <Route
+          path="/edit_users"
+          element={<ProtectedRoute element={<EditUsers />} path="/edit_users" />}
+        />
       </Routes>
     </BrowserRouter>
   );

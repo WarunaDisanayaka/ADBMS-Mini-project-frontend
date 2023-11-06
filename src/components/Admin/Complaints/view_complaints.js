@@ -3,6 +3,8 @@ import Sidebar from '../Sidebar';
 import Topbar from '../../Topbar';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 
 function ViewComplaints() {
@@ -16,6 +18,22 @@ function ViewComplaints() {
   ];
 
   const [complaints, setComplaints] = useState([]);
+  const generatePDF = () => {
+    const result = complaints.map(item => [
+      item.complainId,
+      item.roomId,
+      item.complainDescription,
+      item.date,
+      item.status
+    ]);
+
+    const doc = new jsPDF();
+    doc.autoTable({
+      head: [['Complaint ID','Room ID','Complaint Description', 'Complaint Date', 'Complaint Status']],
+      body: result,
+    });
+    doc.save('Complain_Report.pdf');
+  };
 
   useEffect(() => {
     // Fetch complaint data from the API
@@ -35,7 +53,7 @@ function ViewComplaints() {
 
   // Handle changing the status of a complaint
   // Handle changing the status of a complaint
-const handleStatusChange = (complaint, newStatus) => {
+  const handleStatusChange = (complaint, newStatus) => {
     // Make a PUT request to update the status of the complaint
     axios.put(`http://3.229.95.193:8080/complains/${complaint.complainId}`, {
       status: newStatus,
@@ -47,7 +65,7 @@ const handleStatusChange = (complaint, newStatus) => {
           [complaint.complainId]: newStatus,
         });
         showSuccessToast('Status updated successfully');
-       
+
 
       })
       .catch((error) => {
@@ -64,7 +82,7 @@ const handleStatusChange = (complaint, newStatus) => {
   const showErrorToast = (message) => {
     toast.error(message);
   };
-  
+
 
   return (
     <div className="d-flex">
@@ -74,6 +92,7 @@ const handleStatusChange = (complaint, newStatus) => {
       <div className="flex-grow-1">
         <Topbar />
         <div className="p-4">
+          <button className='btn btn-outline-primary' onClick={generatePDF}>generatePDF</button>
           <table className="table table-striped">
             <thead>
               <tr>
@@ -83,45 +102,45 @@ const handleStatusChange = (complaint, newStatus) => {
               </tr>
             </thead>
             <tbody>
-            {complaints.map((complaint, index) => (
-  <tr key={index}>
-    {columns.map((column, columnIndex) => (
-      <td key={columnIndex}>
-        {column.isStatusChange ? (
-          <div>
-            <span>{complaint[column.dataKey]}</span>
-            <select
-              value={selectedStatus[complaint.complainId] || complaint.status}
-              onChange={(e) => {
-                const newStatus = e.target.value;
-                setSelectedStatus({
-                  ...selectedStatus,
-                  [complaint.complainId]: newStatus,
-                });
-              }}
-            >
-              <option value="Open">Open</option>
-              <option value="Closed">Closed</option>
-              <option value="In Progress">In Progress</option>
-              <option value="repair">Repair</option>
-            </select>
-            <button className="btn btn-primary" onClick={() => handleStatusChange(complaint, selectedStatus[complaint.complainId])}>
-              Save
-            </button>
-          </div>
-        ) : column.isImage ? (
-          <img src={complaint[column.dataKey]} alt="Evidence" style={{ maxWidth: '100px' }} />
-        ) : (
-          column.isAction ? (
-            <button className="btn btn-primary" onClick={() => handleStatusChange(complaint, complaint.status)}>
-              Save
-            </button>
-          ) : complaint[column.dataKey]
-        )}
-      </td>
-    ))}
-  </tr>
-))}
+              {complaints.map((complaint, index) => (
+                <tr key={index}>
+                  {columns.map((column, columnIndex) => (
+                    <td key={columnIndex}>
+                      {column.isStatusChange ? (
+                        <div>
+                          <span>{complaint[column.dataKey]}</span>
+                          <select
+                            value={selectedStatus[complaint.complainId] || complaint.status}
+                            onChange={(e) => {
+                              const newStatus = e.target.value;
+                              setSelectedStatus({
+                                ...selectedStatus,
+                                [complaint.complainId]: newStatus,
+                              });
+                            }}
+                          >
+                            <option value="Open">Open</option>
+                            <option value="Closed">Closed</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="repair">Repair</option>
+                          </select>
+                          <button className="btn btn-primary" onClick={() => handleStatusChange(complaint, selectedStatus[complaint.complainId])}>
+                            Save
+                          </button>
+                        </div>
+                      ) : column.isImage ? (
+                        <img src={complaint[column.dataKey]} alt="Evidence" style={{ maxWidth: '100px' }} />
+                      ) : (
+                        column.isAction ? (
+                          <button className="btn btn-primary" onClick={() => handleStatusChange(complaint, complaint.status)}>
+                            Save
+                          </button>
+                        ) : complaint[column.dataKey]
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              ))}
             </tbody>
             <ToastContainer />
 

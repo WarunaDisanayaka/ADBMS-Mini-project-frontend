@@ -3,8 +3,7 @@ import axios from 'axios';
 import Sidebar from '../Sidebar';
 import Topbar from '../../Topbar';
 import { Form } from 'react-bootstrap';
-import { auto } from '@popperjs/core';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 
 function AddUsers() {
   const [validated, setValidated] = useState(false);
@@ -52,6 +51,7 @@ function AddUsers() {
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
+      setValidated(true);
     } else {
       event.preventDefault();
       const formdata = {
@@ -61,10 +61,9 @@ function AddUsers() {
         password: value4,
         roleId: value5
       }
-      console.log(formdata);
       sendData(formdata);
       handleClick();
-      setValidated(false);
+      setValidated();
     }
     
   };
@@ -82,9 +81,9 @@ function AddUsers() {
     });
 
   };
-  const sendData = (data) =>{
 
-    
+
+  const sendData = (data) =>{ 
   axios.post('http://3.229.95.193:8080/users/',data)
   .then(response => {
     // Handle success
@@ -142,6 +141,7 @@ function AddUsers() {
           </div>
         </div>
       </div>
+      <ToastContainer/>
     </div>
   );
 }

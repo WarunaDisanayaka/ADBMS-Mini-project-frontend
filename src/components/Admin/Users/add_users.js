@@ -4,6 +4,8 @@ import Sidebar from '../Sidebar';
 import Topbar from '../../Topbar';
 import { Form } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
+import { auto } from '@popperjs/core';
+import { toast } from 'react-toastify';
 
 function AddUsers() {
   const [validated, setValidated] = useState(false);
@@ -84,6 +86,30 @@ function AddUsers() {
 
 
   const sendData = (data) =>{ 
+      console.log(formdata);
+      sendData(formdata);
+      handleClick();
+      setValidated(false);
+    }
+    
+  };
+
+  const notify = (type, msg) => {
+    toast[type](msg, {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+
+  };
+  const sendData = (data) =>{
+
+    
   axios.post('http://3.229.95.193:8080/users/',data)
   .then(response => {
     // Handle success

@@ -16,6 +16,7 @@
     "date-fns": "^2.30.0",
     "jquery": "^3.7.1",
     "jquery-easing": "^0.0.1",
+    "js-cookie": "^3.0.5",
     "mdb-react-ui-kit": "^6.3.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.9.1",

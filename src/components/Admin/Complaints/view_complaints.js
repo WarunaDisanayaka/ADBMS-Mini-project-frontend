@@ -103,6 +103,7 @@ const handleStatusChange = (complaint, newStatus) => {
               <option value="Open">Open</option>
               <option value="Closed">Closed</option>
               <option value="In Progress">In Progress</option>
+              <option value="repair">Repair</option>
             </select>
             <button className="btn btn-primary" onClick={() => handleStatusChange(complaint, selectedStatus[complaint.complainId])}>
               Save

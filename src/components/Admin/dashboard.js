@@ -2,12 +2,67 @@ import React from 'react'
 import Topbar from '../Topbar'
 import Sidebar from './Sidebar'
 import { Card,Row,Col } from 'react-bootstrap'
+import { useState } from 'react';
+import { useEffect } from 'react';
+import axios from 'axios';
 function Dashboard() {
 
+  const [open,setOpen] = useState('');
+  const [inprogress,setInprogress] = useState('');
+  const [repair,setRepair] = useState('');
+  const [closed,setClosed] = useState(''); 
+
   const variant = ['danger','info','warning','success'];
-  const titles = ['Total Complains','Total Reviewed Cases','Total on Repair cases','Total Reslove Cases']
-  const numbers =[25,15,3,7];
-  const iconlist = ['fas fa-exclamation','fas fa-user-check','fas fa-wrench','fas fa-check']
+  const titles = ['Total Open Complains','Total Reviewed Cases','Total on Repair cases','Total Reslove Cases'];
+  const numbers =[open,inprogress,repair,closed];
+  const iconlist = ['fas fa-exclamation','fas fa-user-check','fas fa-wrench','fas fa-check'];
+
+  
+
+  useEffect(()=>{
+    axios.post('http://3.229.95.193:8080/complains/openCount')
+            .then(response => {
+                // Handle success
+                setOpen(response.data);
+               
+            })
+            .catch(error => {
+                // Handle error
+              console.log(error);
+            });
+            axios.post('http://3.229.95.193:8080/complains/inProgressCount')
+            .then(response => {
+                // Handle success
+                setInprogress(response.data);
+               
+            })
+            .catch(error => {
+                // Handle error
+              console.log(error);
+            });
+            axios.post('http://3.229.95.193:8080/complains/repairCount')
+            .then(response => {
+                // Handle success
+                setRepair(response.data);
+               
+            })
+            .catch(error => {
+                // Handle error
+              console.log(error);
+            });
+            axios.post('http://3.229.95.193:8080/complains/closedCount')
+            .then(response => {
+                // Handle success
+                setClosed(response.data);
+               
+            })
+            .catch(error => {
+                // Handle error
+              console.log(error);
+            });
+    
+  },[]);
+
   return (
 
     <div className='d-flex'>

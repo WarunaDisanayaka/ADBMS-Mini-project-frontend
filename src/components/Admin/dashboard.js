@@ -63,6 +63,12 @@ function Dashboard() {
     
   },[]);
 
+function Dashboard() {
+
+  const variant = ['danger','info','warning','success'];
+  const titles = ['Total Complains','Total Reviewed Cases','Total on Repair cases','Total Reslove Cases']
+  const numbers =[25,15,3,7];
+  const iconlist = ['fas fa-exclamation','fas fa-user-check','fas fa-wrench','fas fa-check']
   return (
 
     <div className='d-flex'>

@@ -14,6 +14,7 @@ import ViewComplaints from "./components/Admin/Complaints/view_complaints";
 import ViewRooms from "./components/Admin/Rooms/view_rooms";
 import EditRooms from "./components/Admin/Rooms/edit_room";
 import EditAssets from "./components/Admin/Assets/edit_assets";
+import EditUsers from "./components/Admin/Users/edit_users";
 import Cookies from 'js-cookie';
 
 

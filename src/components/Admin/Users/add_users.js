@@ -3,6 +3,7 @@ import axios from 'axios';
 import Sidebar from '../Sidebar';
 import Topbar from '../../Topbar';
 import { Form } from 'react-bootstrap';
+import { ToastContainer, toast } from 'react-toastify';
 import { auto } from '@popperjs/core';
 import { toast } from 'react-toastify';
 
@@ -52,6 +53,7 @@ function AddUsers() {
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
+      setValidated(true);
     } else {
       event.preventDefault();
       const formdata = {
@@ -61,6 +63,29 @@ function AddUsers() {
         password: value4,
         roleId: value5
       }
+      sendData(formdata);
+      handleClick();
+      setValidated();
+    }
+    
+  };
+
+  const notify = (type, msg) => {
+    toast[type](msg, {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+
+  };
+
+
+  const sendData = (data) =>{ 
       console.log(formdata);
       sendData(formdata);
       handleClick();
@@ -142,6 +167,7 @@ function AddUsers() {
           </div>
         </div>
       </div>
+      <ToastContainer/>
     </div>
   );
 }

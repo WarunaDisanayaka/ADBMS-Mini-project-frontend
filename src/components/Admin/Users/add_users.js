@@ -5,7 +5,7 @@ import Topbar from '../../Topbar';
 import { Form } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import { auto } from '@popperjs/core';
-import { toast } from 'react-toastify';
+
 
 function AddUsers() {
   const [validated, setValidated] = useState(false);
@@ -120,7 +120,7 @@ function AddUsers() {
     // Handle error
     notify(statuses[1].type, statuses[1].message);
   });
-};
+
 
   return (
     <div className='d-flex'>
@@ -170,6 +170,6 @@ function AddUsers() {
       <ToastContainer/>
     </div>
   );
-}
+  };
 
 export default AddUsers;

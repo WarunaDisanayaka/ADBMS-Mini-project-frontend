@@ -35,7 +35,7 @@ function ViewMaintenance() {
 
     useEffect(() => {
         // Fetch data from the API
-        axios.get('http://3.229.95.193:8080/users/get-users')
+        axios.get('http://3.229.95.193:8080/maintainance')
             .then(response => {
                 // Handle success
                 setUserData(response.data);

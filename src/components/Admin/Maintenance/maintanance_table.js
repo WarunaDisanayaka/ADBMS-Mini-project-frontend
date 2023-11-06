@@ -57,17 +57,13 @@ const MaintenanceTable = ({ columns, data }) => {
         setCurrentPage(pageNumber);
     };
 
-    const handleEditButtonClick = (index) => {
-        const row = data[index];
-        navigate('/edit_users', { state: row });
+    const getImage = (path) => {
+
+        return <a href={path} target='_blank'  title="Click to view"><img src={path} alt="Asset" style={{ width: '70px', height: '70px' }} /></a>;
     };
 
 
-    const handleDeleteButtonClick = (index) => {
-        setId(filteredData[index].userId);
-        setRegNO(filteredData[index].regNo);
-        setShow(true);
-    };
+    
 
     const handleDelete = () => {
         axios
@@ -128,43 +124,19 @@ const MaintenanceTable = ({ columns, data }) => {
                             {columns.map((col) => (
                                 <th key={col.dataKey}>{col.label}</th>
                             ))}
-                            <th>Actions</th>
+                            
+                            
                         </tr>
                     </thead>
                     <tbody>
-                        {/* {currentRows.map((row, index) => (
-                            <tr key={index}>
-                                {columns.map((col) => (
-                                    <td key={col.dataKey}>{row[col.dataKey]}</td>
-                                ))} */}
-
                         {currentRows.map((row, index) => (
                             <tr key={index}>
-                                {columns.map((col, colIndex) => (
-                                    <td key={col.dataKey}>
-                                        {colIndex === columns.length - 1 ?
-                                            row[col.dataKey] === 1 ? 'admin' :
-                                                row[col.dataKey] === 2 ? 'warden' :
-                                                    row[col.dataKey] === 3 ? 'sub-warden' :
-                                                        row[col.dataKey] === 4 ? 'student' :
-                                                            row[col.dataKey] : row[col.dataKey]}
-                                    </td>
+                                {columns.slice(0, -1).map((col) => (
+                                    <td key={col.dataKey}>{row[col.dataKey]}</td>
                                 ))}
-
                                 <td className='p-2'>
-                                    <button
-                                        className="btn btn-outline-primary btn-sm ml"
-                                        onClick={() => handleEditButtonClick(index)}
-                                    >
-                                        <i className='fas fa-edit'></i>
-                                    </button>
-                                    <button
-                                        className="btn btn-outline-danger btn-sm ml-2"
-                                        onClick={() => handleDeleteButtonClick(index)}
-                                    >
-                                        <i className='fas fa-trash'></i>
-                                    </button>
-                                </td>
+                                {getImage(row.evidenceImage)}
+                            </td>
                             </tr>
                         ))}
                     </tbody>

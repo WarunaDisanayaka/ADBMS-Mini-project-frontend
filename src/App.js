@@ -14,6 +14,7 @@ import ViewComplaints from "./components/Admin/Complaints/view_complaints";
 import ViewRooms from "./components/Admin/Rooms/view_rooms";
 import EditRooms from "./components/Admin/Rooms/edit_room";
 import EditAssets from "./components/Admin/Assets/edit_assets";
+import EditUsers from "./components/Admin/Users/edit_users";
 function App() {
   return (
     
@@ -32,6 +33,7 @@ function App() {
         <Route path="/view_room" element={<ViewRooms/>}></Route>
         <Route path="/edit_room" element={<EditRooms/>}></Route>
         <Route path="/edit_assets" element={<EditAssets/>}></Route>
+        <Route path="/edit_users" element={<EditUsers/>}></Route>
       </Routes>
     </BrowserRouter>
 

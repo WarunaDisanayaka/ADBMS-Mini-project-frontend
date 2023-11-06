@@ -3,8 +3,22 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "../../Assets/vendor/fontawesome-free/css/all.min.css";
 import "../../Assets/css/sb-admin-2.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import { Link,useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
+
 
 const Sidebar = () => {
+    const navigate = useNavigate(); // Initialize the navigate function
+
+    const handleLogout = () => {
+        console.log('Logout button clicked'); // Add this log to check if the button is clicked
+        Cookies.remove('userToken');
+        console.log('User token removed'); // Add this log to check if the user token is removed
+        navigate("/add_asset"); // Use navigate to go to the desired route
+        console.log('Navigate to root');
+    };
+    
+
     return ( 
         <ul className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
             <a className="sidebar-brand d-flex align-items-center justify-content-center" href="/admin_dashboard">
@@ -91,6 +105,16 @@ const Sidebar = () => {
             <hr className="sidebar-divider d-none d-md-block" />
             <div className="text-center d-none d-md-inline">
             </div>
+            <hr className="sidebar-divider d-none d-md-block" />
+
+            <div className="text-center d-none d-md-inline">
+            <div className="text-center d-none d-md-inline">
+            <button onClick={handleLogout} className="btn btn-link" style={{ cursor: 'pointer' }}>
+                <i className="fas fa-fw fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </button>
+        </div>
+      </div>
         </ul>
     );
 };

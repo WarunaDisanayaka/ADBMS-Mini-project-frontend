@@ -89,10 +89,9 @@ const UserTable = ({ columns, data }) => {
     const currentRows = filteredData.slice(indexOfFirstRow, indexOfLastRow);
 
     const [show, setShow] = useState(false);
-    const [show2, setShow2] = useState(false);
     const handleClose = () => {
         setShow(false);
-        setShow2(false);
+       
     };
 
     return (

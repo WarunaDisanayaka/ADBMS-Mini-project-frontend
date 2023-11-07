@@ -21,15 +21,16 @@ const Topbar = ({roleid}) => {
   
     
   const getUserRole = (role_id) => {
-    let role = 'Admin';
-
-  if (role_id === 3) {
+    let role = '';
+    console.log(role_id);
+  if (role_id = 3) {
     role = 'Admin';
-  } else if (role_id === 4) {
+    console.log(role)
+  } else if (role_id = 4) {
     role = 'Student';
-  } else if (role_id === 2) {
+  } else if (role_id =2) {
     role = 'Sub-Warden';
-  } else if (role_id === 1) {
+  } else if (role_id = 1) {
     role = 'Warden';
   }
   

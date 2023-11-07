@@ -28,9 +28,9 @@ const Topbar = ({roleid}) => {
     console.log(role)
   } else if (role_id = 4) {
     role = 'Student';
-  } else if (role_id =2) {
+  } else if (role_id =6) {
     role = 'Sub-Warden';
-  } else if (role_id = 1) {
+  } else if (role_id = 5) {
     role = 'Warden';
   }
   

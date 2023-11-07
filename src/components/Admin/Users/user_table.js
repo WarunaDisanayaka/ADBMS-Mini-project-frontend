@@ -143,9 +143,9 @@ const UserTable = ({ columns, data }) => {
                                 {columns.map((col, colIndex) => (
                                     <td key={col.dataKey}>
                                         {colIndex === columns.length - 1 ?
-                                            row[col.dataKey] === 1 ? 'admin' :
-                                                row[col.dataKey] === 2 ? 'warden' :
-                                                    row[col.dataKey] === 3 ? 'sub-warden' :
+                                            row[col.dataKey] === 3 ? 'admin' :
+                                                row[col.dataKey] === 5 ? 'warden' :
+                                                    row[col.dataKey] === 6 ? 'sub-warden' :
                                                         row[col.dataKey] === 4 ? 'student' :
                                                             row[col.dataKey] : row[col.dataKey]}
                                     </td>

@@ -28,6 +28,7 @@ function ViewComplaints() {
     ]);
 
     const doc = new jsPDF();
+    doc.text('Complaint Report', 10, 10);
     doc.autoTable({
       head: [['Complaint ID','Room ID','Complaint Description', 'Complaint Date', 'Complaint Status']],
       body: result,

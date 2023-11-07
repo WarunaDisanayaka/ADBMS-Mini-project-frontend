@@ -55,8 +55,8 @@ export default function Login() {
   return (
     <div className="login template d-flex justify-content-center align-items-center vh-100 bg-light">
       <div className='form_container shadow p-5 mb-5 rounded bg-white' style={{ width: '500px' }}>
+      <h1 className='text-center mb-4'>FOT Hostel Assets Management System</h1>
         <form onSubmit={handleSubmit}>
-          <h3 className='text-center'>Login</h3>
           <div className='mb-2 p-1'>
             <label htmlFor='username' className='mb-2'>Username</label>
             <input

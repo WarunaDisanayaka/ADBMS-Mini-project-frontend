@@ -35,7 +35,7 @@ const Sidebar = () => {
                 </a>
             </li>
             <hr className="sidebar-divider" />
-            <div className="sidebar-heading">Addons</div>
+            <div className="sidebar-heading">Actions</div>
             <li className="nav-item">
                 <a className="nav-link collapsed d-flex align-items-center justify-content-between" href="#collapseTwo"
                     data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true"
@@ -94,13 +94,16 @@ const Sidebar = () => {
                 </div>
             </li>
             <hr className="sidebar-divider" />
-            <div className="sidebar-heading">Actions</div>
+            <div className="sidebar-heading">Views</div>
         
             <li className="nav-item">
                 <a className="nav-link" href="/view_complaint"> <i className="fas fa-fw fa-comments"></i> <span>Complaints</span> </a>
             </li>
             <li className="nav-item">
                 <a className="nav-link" href="/view_maintenance"> <i className="fas fa-fw fa-wrench"></i> <span>Maintenance</span> </a>
+            </li>
+            <li className="nav-item">
+                <a className="nav-link" href="/user_log"> <i className="fas fa-list "></i> <span>User Log</span> </a>
             </li>
             <hr className="sidebar-divider d-none d-md-block" />
             <div className="text-center d-none d-md-inline">

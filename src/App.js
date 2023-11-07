@@ -16,6 +16,7 @@ import EditRooms from "./components/Admin/Rooms/edit_room";
 import EditAssets from "./components/Admin/Assets/edit_assets";
 import EditUsers from "./components/Admin/Users/edit_users";
 import Cookies from 'js-cookie';
+import UserLog from "./components/Admin/User_Log/user_log";
 
 
 function App() {
@@ -93,6 +94,10 @@ function App() {
          <Route
           path="/edit_users"
           element={<ProtectedRoute element={<EditUsers />} path="/edit_users" />}
+        />
+        <Route
+          path="/user_log"
+          element={<ProtectedRoute element={<UserLog />} path="/user_log" />}
         />
       </Routes>
     </BrowserRouter>

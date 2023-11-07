@@ -100,8 +100,8 @@ function AddUsers() {
       </div>
       <div className='flex-grow-1'>
         <Topbar />
-        <div className="login template d-flex justify-content-center align-items-center vh-100 bg-light">
-          <div className='form_container shadow p-5 mb-2 rounded bg-white'>
+        <div className="login template d-flex justify-content-center align-items-center vh-100 ">
+          <div className='form_container shadow p-5 mb-2 rounded bg-white' style={{width:400}}>
             <Form noValidate validated={validated} onSubmit={handleSubmit} method='post'>
               <h3 className='text-center'>Add User</h3>
               <div className='mb-1 p-1'>
@@ -126,8 +126,9 @@ function AddUsers() {
                   <option disabled selected value="">Select role...</option>
                   <option value="3">Admin</option>
                   <option value="4">Student</option>
-                  <option value="1">Warden</option>
-                  <option value="2">Sub-Warden</option>
+                  <option value="5">Warden</option>
+                  <option value="6">Sub-Warden</option>
+                 
                 </Form.Select>
               </div>
               <div className="d-grid ">
